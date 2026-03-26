@@ -58,7 +58,7 @@ export default function BusinessServices() {
                 Boka tid
               </a>
               <a href="/foretag" className="btn-secondary" style={{ padding: "14px 28px", fontSize: 15 }}>
-                Våra tjänster <ArrowRight size={16} />
+                Våra företagstjänster <ArrowRight size={16} />
               </a>
             </div>
           </motion.div>
