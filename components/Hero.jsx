@@ -282,18 +282,18 @@ export default function Hero() {
               <motion.div key="step0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 20 }} className="hero-form-grid">
                   <div>
-                    <label style={labelStyle}>Typ av tjänst</label>
+                    <label htmlFor="hero-service" style={labelStyle}>Typ av tjänst</label>
                     <div style={{ position: "relative" }}>
-                      <select value={serviceId} onChange={(e) => { setServiceId(e.target.value); setSqm(""); setFrequency(null); setSelectedAddons([]); }}
-                        style={{ ...inputStyle, appearance: "none", cursor: "pointer", paddingRight: 40, color: serviceId ? "#1a1a1a" : "#999" }}>
+                      <select id="hero-service" value={serviceId} onChange={(e) => { setServiceId(e.target.value); setSqm(""); setFrequency(null); setSelectedAddons([]); }}
+                        style={{ ...inputStyle, appearance: "none", cursor: "pointer", paddingRight: 40, color: serviceId ? "#1a1a1a" : "#666" }}>
                         {SERVICE_OPTIONS.map((o) => <option key={o.value} value={o.value} disabled={o.value === ""}>{o.label}</option>)}
                       </select>
                       <ChevronDown size={18} style={{ position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)", color: "#666", pointerEvents: "none" }} />
                     </div>
                   </div>
                   <div>
-                    <label style={labelStyle}>{inputLabel}</label>
-                    <input type="number" min="1" placeholder="Skriv kvadratmeter här..." value={sqm} onChange={(e) => setSqm(e.target.value)} style={inputStyle} />
+                    <label htmlFor="hero-sqm" style={labelStyle}>{inputLabel}</label>
+                    <input id="hero-sqm" type="number" min="1" placeholder="Skriv kvadratmeter här..." value={sqm} onChange={(e) => setSqm(e.target.value)} style={inputStyle} />
                   </div>
                 </div>
                 <div style={{ display: "flex", justifyContent: "flex-end" }}>

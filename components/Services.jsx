@@ -59,7 +59,7 @@ export default function Services() {
               >
                 <Image
                   src={card.image}
-                  alt={card.title}
+                  alt=""
                   fill
                   sizes="(max-width: 768px) 100vw, 300px"
                   style={{ objectFit: "cover" }}

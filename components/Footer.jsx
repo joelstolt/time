@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer style={{ background: "var(--color-primary)", color: "rgba(255,255,255,0.6)" }}>
+    <footer style={{ background: "var(--color-primary)", color: "rgba(255,255,255,0.78)" }}>
       <div className="container" style={{ padding: "64px 20px 32px" }}>
         <div
           style={{
@@ -28,10 +28,10 @@ export default function Footer() {
               Familjeägt städföretag i Stockholm med över 35 års erfarenhet. Vi utför våra tjänster i rätt tid, på rätt sätt och enligt överenskomna villkor.
             </p>
             <div style={{ display: "flex", gap: 12 }}>
-              <div style={{ padding: "6px 12px", background: "rgba(255,255,255,0.08)", borderRadius: 6, fontSize: 12, display: "flex", alignItems: "center", gap: 6, color: "rgba(255,255,255,0.7)" }}>
+              <div style={{ padding: "6px 12px", background: "rgba(255,255,255,0.08)", borderRadius: 6, fontSize: 12, display: "flex", alignItems: "center", gap: 6, color: "rgba(255,255,255,0.85)" }}>
                 <Shield size={13} /> Försäkrad
               </div>
-              <div style={{ padding: "6px 12px", background: "rgba(255,255,255,0.08)", borderRadius: 6, fontSize: 12, display: "flex", alignItems: "center", gap: 6, color: "rgba(255,255,255,0.7)" }}>
+              <div style={{ padding: "6px 12px", background: "rgba(255,255,255,0.08)", borderRadius: 6, fontSize: 12, display: "flex", alignItems: "center", gap: 6, color: "rgba(255,255,255,0.85)" }}>
                 <BadgeCheck size={13} /> RUT-avdrag
               </div>
             </div>
@@ -39,9 +39,9 @@ export default function Footer() {
 
           {/* Privatperson */}
           <div>
-            <h4 style={{ fontSize: 14, fontWeight: 700, color: "white", fontFamily: "var(--font-body)", letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 20, lineHeight: 1 }}>
+            <h3 style={{ fontSize: 14, fontWeight: 700, color: "white", fontFamily: "var(--font-body)", letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 20, lineHeight: 1 }}>
               Privatperson
-            </h4>
+            </h3>
             <a href="/hemstadning" className="footer-link">Hemstädning</a>
             <a href="/flyttstadning" className="footer-link">Flyttstädning</a>
             <a href="/storstadning" className="footer-link">Storstädning</a>
@@ -52,9 +52,9 @@ export default function Footer() {
 
           {/* Företag */}
           <div>
-            <h4 style={{ fontSize: 14, fontWeight: 700, color: "white", fontFamily: "var(--font-body)", letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 20, lineHeight: 1 }}>
+            <h3 style={{ fontSize: 14, fontWeight: 700, color: "white", fontFamily: "var(--font-body)", letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 20, lineHeight: 1 }}>
               Företag
-            </h4>
+            </h3>
             <a href="/kontorstadning" className="footer-link">Kontorstädning</a>
             <a href="/fonsterputs-foretag" className="footer-link">Fönsterputs företag</a>
             <a href="/fonsterputs-butik" className="footer-link">Fönsterputs butik</a>
@@ -65,9 +65,9 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 style={{ fontSize: 14, fontWeight: 700, color: "white", fontFamily: "var(--font-body)", letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 20, lineHeight: 1 }}>
+            <h3 style={{ fontSize: 14, fontWeight: 700, color: "white", fontFamily: "var(--font-body)", letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 20, lineHeight: 1 }}>
               Kontakt
-            </h4>
+            </h3>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <a href="tel:08-377176" className="footer-contact-link">
                 <Phone size={15} /> 08-37 71 76
@@ -78,7 +78,7 @@ export default function Footer() {
               <div style={{ fontSize: 14, display: "flex", alignItems: "flex-start", gap: 8 }}>
                 <MapPin size={15} style={{ flexShrink: 0, marginTop: 2 }} /> Terrängvägen 43, 129 48 Hägersten
               </div>
-              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.35)", marginTop: 4 }}>
+              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.65)", marginTop: 4 }}>
                 Mån–Fre 08:00–17:00
               </div>
             </div>
