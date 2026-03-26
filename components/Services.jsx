@@ -44,6 +44,7 @@ export default function Services() {
               <a
                 key={card.title}
                 href={card.href}
+                className="service-image-card"
                 style={{
                   position: "relative",
                   display: "block",

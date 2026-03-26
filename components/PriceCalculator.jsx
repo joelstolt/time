@@ -491,9 +491,15 @@ export default function PriceCalculator() {
                         {service.type === "subscription" ? "Pris per månad efter RUT-avdrag" : "Totalt pris efter RUT-avdrag"}
                       </div>
                       <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 4 }}>
-                        <span style={{ fontSize: 48, fontWeight: 800, color: "var(--color-accent)", fontFamily: "var(--font-body)" }}>
+                        <motion.span
+                          className="text-shimmer"
+                          initial={{ scale: 0.5, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.2 }}
+                          style={{ fontSize: 48, fontWeight: 800, fontFamily: "var(--font-body)", display: "inline-block" }}
+                        >
                           {formatPrice(result.total)}
-                        </span>
+                        </motion.span>
                         <span style={{ fontSize: 18, color: "rgba(255,255,255,0.6)", fontWeight: 500 }}>
                           {result.unit}
                         </span>

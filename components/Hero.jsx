@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Star, Shield, Award, Leaf, Check, ArrowLeft } from "lucide-react";
+import { useScroll, useTransform } from "framer-motion";
 
 /* ══════════════════ PRICING DATA ══════════════════ */
 
@@ -181,6 +182,10 @@ const trustItems = [
 ];
 
 export default function Hero() {
+  const { scrollY } = useScroll();
+  const bgY = useTransform(scrollY, [0, 600], [0, 150]);
+  const contentY = useTransform(scrollY, [0, 600], [0, -30]);
+
   // Step: 0 = service+sqm, 1 = frequency/addons + price, 2 = booking form
   const [step, setStep] = useState(0);
   const [serviceId, setServiceId] = useState("");
@@ -238,12 +243,12 @@ export default function Hero() {
 
   return (
     <section style={{ position: "relative", minHeight: "auto", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-      <div style={{ position: "absolute", inset: 0, background: "var(--color-primary)", backgroundImage: "url('/hero-bg.jpg')", backgroundSize: "cover", backgroundPosition: "center" }} />
+      <motion.div style={{ position: "absolute", inset: "-20%", background: "var(--color-primary)", backgroundImage: "url('/hero-bg.jpg')", backgroundSize: "cover", backgroundPosition: "center", y: bgY }} />
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.35))" }} />
       <div style={{ position: "absolute", inset: 0, opacity: 0.06, backgroundImage: "repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(255,255,255,0.4) 20px, rgba(255,255,255,0.4) 21px)" }} />
       <div style={{ position: "absolute", top: "20%", left: "10%", width: "50%", height: "60%", background: "radial-gradient(ellipse, rgba(0,114,185,0.2) 0%, transparent 70%)", pointerEvents: "none" }} />
 
-      <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "clamp(48px, 8vw, 120px) 16px clamp(40px, 6vw, 80px)", width: "100%", maxWidth: 860, margin: "0 auto" }}>
+      <motion.div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "clamp(48px, 8vw, 120px) 16px clamp(40px, 6vw, 80px)", width: "100%", maxWidth: 860, margin: "0 auto", y: contentY }}>
         {/* Badge */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
           style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,0.12)", backdropFilter: "blur(8px)", padding: "8px 18px", borderRadius: 40, marginBottom: 28, border: "1px solid rgba(255,255,255,0.15)" }}>
@@ -437,7 +442,7 @@ export default function Hero() {
             </div>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
 
       <style jsx global>{`
         @media (max-width: 640px) {

@@ -70,10 +70,11 @@ export default function WhyUs() {
           {reasons.map((reason, i) => (
             <motion.div
               key={reason.title}
+              className="premium-card"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
               style={{
                 padding: 32,
                 background: "white",

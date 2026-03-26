@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X, Phone, Mail, ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 
 const navLinks = [
   {
@@ -92,16 +92,20 @@ export default function Header() {
         </div>
       </div>
 
+      {/* Scroll progress */}
+      <motion.div className="scroll-progress" style={{ scaleX: useSpring(useScroll().scrollYProgress, { stiffness: 100, damping: 30 }) }} />
+
       {/* Main nav */}
       <header
         style={{
           position: "sticky",
           top: 0,
           zIndex: 100,
-          background: scrolled ? "rgba(255,255,255,0.98)" : "white",
-          borderBottom: scrolled ? "none" : "1px solid var(--color-border-light)",
-          boxShadow: scrolled ? "0 4px 30px rgba(0,0,0,0.08)" : "none",
-          transition: "all 0.3s ease",
+          background: scrolled ? "rgba(255,255,255,0.85)" : "white",
+          backdropFilter: scrolled ? "blur(12px)" : "none",
+          borderBottom: scrolled ? "2px solid var(--color-accent)" : "1px solid var(--color-border-light)",
+          boxShadow: scrolled ? "0 4px 30px rgba(0,0,0,0.06)" : "none",
+          transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       >
         <nav className="container header-nav" style={{ padding: "0 20px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 }}>

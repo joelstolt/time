@@ -28,6 +28,9 @@ export default function CTABanner() {
         }}
       />
 
+      {/* Radial glow */}
+      <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "60%", height: "80%", background: "radial-gradient(ellipse, rgba(222,160,30,0.12) 0%, transparent 70%)", pointerEvents: "none" }} />
+
       <div
         className="container"
         style={{
