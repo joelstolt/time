@@ -1,6 +1,7 @@
 "use client";
 
 import { Phone, Mail, MapPin, Shield, BadgeCheck } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -16,9 +17,11 @@ export default function Footer() {
         >
           {/* Brand */}
           <div>
-            <img
+            <Image
               src="/timeout-logo-2.png"
               alt="Timeout Service AB"
+              width={76}
+              height={68}
               style={{ height: 68, width: "auto", marginBottom: 16, filter: "brightness(0) invert(1)" }}
             />
             <p style={{ fontSize: 14, lineHeight: 1.7, maxWidth: 300, marginBottom: 24 }}>

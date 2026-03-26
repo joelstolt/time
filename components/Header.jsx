@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Menu, X, Phone, Mail, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 
@@ -111,9 +112,12 @@ export default function Header() {
         <nav className="container header-nav" style={{ padding: "0 20px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 }}>
           {/* Logo */}
           <a href="/" className="header-logo" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
-            <img
+            <Image
               src="/timeout-logo-2.png"
               alt="Timeout Service AB"
+              width={72}
+              height={64}
+              priority
               style={{ height: 64, width: "auto" }}
             />
           </a>
@@ -233,7 +237,7 @@ export default function Header() {
             {/* Mobile header */}
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 20px", borderBottom: "1px solid var(--color-border-light)" }}>
               <a href="/" style={{ textDecoration: "none" }}>
-                <img src="/timeout-logo-2.png" alt="Timeout Service AB" style={{ height: 48, width: "auto" }} />
+                <Image src="/timeout-logo-2.png" alt="Timeout Service AB" width={54} height={48} style={{ height: 48, width: "auto" }} />
               </a>
               <button
                 onClick={() => setMobileOpen(false)}

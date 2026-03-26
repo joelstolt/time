@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Award, ShieldCheck, Smartphone } from "lucide-react";
+import Image from "next/image";
 
 const serviceCards = [
   { title: "Fönsterputs", href: "/fonsterputs", image: "/images/fonsterputs.png" },
@@ -56,16 +57,12 @@ export default function Services() {
                   textDecoration: "none",
                 }}
               >
-                <img
+                <Image
                   src={card.image}
                   alt={card.title}
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 300px"
+                  style={{ objectFit: "cover" }}
                 />
                 <div
                   style={{

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronRight, Phone } from "lucide-react";
+import Image from "next/image";
 
 const services = [
   {
@@ -121,13 +122,13 @@ export default function ForetagContent() {
                   e.currentTarget.style.borderColor = "var(--color-border)";
                 }}
               >
-                <div style={{ aspectRatio: "4/3", overflow: "hidden" }}>
-                  <img
+                <div style={{ aspectRatio: "4/3", overflow: "hidden", position: "relative" }} className="service-image-card">
+                  <Image
                     src={service.image}
                     alt={`${service.title} Stockholm — Timeout Service`}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s ease" }}
-                    onMouseEnter={(e) => (e.target.style.transform = "scale(1.05)")}
-                    onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 350px"
+                    style={{ objectFit: "cover" }}
                   />
                 </div>
                 <div style={{ padding: 24, flex: 1, display: "flex", flexDirection: "column" }}>

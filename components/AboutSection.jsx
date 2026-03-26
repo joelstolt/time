@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
+import Image from "next/image";
 
 const highlights = [
   "35 års erfarenhet i bagaget",
@@ -42,9 +43,10 @@ export default function AboutSection() {
                 aspectRatio: "3/4",
                 background: "var(--color-primary-light)",
                 gridRow: "1 / 3",
+                position: "relative",
               }}
             >
-              <img src="/images/staff-kitchen.jpg" alt="Timeout Service — köksstädning" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <Image src="/images/staff-kitchen.jpg" alt="Timeout Service — köksstädning" fill sizes="300px" style={{ objectFit: "cover" }} />
             </div>
             <div
               style={{
@@ -52,9 +54,10 @@ export default function AboutSection() {
                 overflow: "hidden",
                 aspectRatio: "1/1",
                 background: "var(--color-primary-light)",
+                position: "relative",
               }}
             >
-              <img src="/images/staff-bedroom.jpg" alt="Timeout Service — sovrum" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <Image src="/images/staff-bedroom.jpg" alt="Timeout Service — sovrum" fill sizes="300px" style={{ objectFit: "cover" }} />
             </div>
             <div
               style={{
@@ -62,9 +65,10 @@ export default function AboutSection() {
                 overflow: "hidden",
                 aspectRatio: "1/1",
                 background: "var(--color-primary-light)",
+                position: "relative",
               }}
             >
-              <img src="/images/staff-office.jpg" alt="Timeout Service — kontorsstädning" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <Image src="/images/staff-office.jpg" alt="Timeout Service — kontorsstädning" fill sizes="300px" style={{ objectFit: "cover" }} />
             </div>
           </motion.div>
 

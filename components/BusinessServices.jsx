@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 const serviceCards = [
   { title: "Fönsterputs butik", href: "/fonsterputs-butik", image: "/images/fonsterputs-butik.png" },
@@ -90,16 +91,12 @@ export default function BusinessServices() {
                   textDecoration: "none",
                 }}
               >
-                <img
+                <Image
                   src={card.image}
                   alt={card.title}
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 300px"
+                  style={{ objectFit: "cover" }}
                 />
                 <div
                   style={{
