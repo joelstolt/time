@@ -1,0 +1,358 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary — blå: förtroende, professionalitet */
+  --color-primary: #0072B9;
+  --color-primary-hover: #005a94;
+  --color-primary-light: #E0F0FC;
+  --color-primary-dark: #004d7a;
+
+  /* Accent — varm guld: premium-känsla */
+  --color-accent: #DEA01E;
+  --color-accent-hover: #c48d15;
+  --color-accent-light: #FBF3E0;
+
+  /* Backgrounds */
+  --color-bg: #FFFFFF;
+  --color-bg-alt: #F8F8F6;
+  --color-surface-dark: #0C1A2B;
+  --color-surface-dark-elevated: #142236;
+
+  /* Text */
+  --color-heading: #000000;
+  --color-body: #333333;
+  --color-muted: #6B6B6B;
+  --color-faint: #9E9E9E;
+  --color-inverse: #FFFFFF;
+  --color-link: #DEA01E;
+
+  /* Borders */
+  --color-border: #E8E6E0;
+  --color-border-light: #F0EEEA;
+
+  /* Semantic */
+  --color-success: #16A34A;
+
+  /* Fonts — set via next/font CSS vars */
+  --font-heading: var(--font-dm-serif), Georgia, serif;
+  --font-body: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Skip to content link */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 9999;
+  text-decoration: none;
+}
+
+.skip-to-content:focus {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  width: auto;
+  height: auto;
+  padding: 12px 24px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  overflow: visible;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Accessibility — focus states */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-body);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-heading);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: white;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Primary CTA button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 40px;
+  background: var(--color-primary);
+  color: white;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 114, 185, 0.25);
+  color: white;
+}
+
+/* Accent CTA button */
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 40px;
+  background: var(--color-accent);
+  color: white;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.btn-accent:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(222, 160, 30, 0.3);
+  color: white;
+}
+
+/* Secondary / outline button */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 40px;
+  background: transparent;
+  color: var(--color-heading);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+/* Section spacing */
+.section {
+  padding: 100px 20px;
+}
+
+.section-alt {
+  padding: 100px 20px;
+  background: var(--color-bg-alt);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== FOOTER LINKS ===== */
+
+.footer-link {
+  display: block;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 5px 0;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.footer-link:hover {
+  color: var(--color-accent);
+  padding-left: 6px;
+}
+
+.footer-contact-link {
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s ease;
+}
+
+.footer-contact-link:hover {
+  color: var(--color-accent);
+}
+
+/* ===== HEADER RESPONSIVE ===== */
+
+#header-cta {
+  display: inline-flex !important;
+}
+
+#header-hamburger {
+  display: none !important;
+}
+
+@media (max-width: 1024px) {
+  #header-cta {
+    display: none !important;
+  }
+  #header-hamburger {
+    display: block !important;
+  }
+  .desktop-nav {
+    display: none !important;
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  .section,
+  .section-alt {
+    padding: 64px 16px;
+  }
+
+  .btn-primary,
+  .btn-accent,
+  .btn-secondary {
+    padding: 14px 28px;
+    font-size: 15px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Top bar — hide hours on small screens, keep email */
+  .topbar-hours {
+    display: none !important;
+  }
+
+  /* Header */
+  .header-nav {
+    height: 56px !important;
+  }
+
+  .header-logo img {
+    height: 40px !important;
+  }
+
+  /* Hero */
+  .hero-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-trust {
+    gap: 16px !important;
+  }
+
+  .hero-trust > div {
+    font-size: 12px !important;
+  }
+
+  /* Services / Business layout */
+  .services-layout,
+  .biz-layout,
+  .about-layout {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  /* Why us grid */
+  .why-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Steps grid */
+  .steps-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  /* Calculator content */
+  .calc-content {
+    padding: 20px 16px !important;
+  }
+
+  /* USP badges wrap */
+  .usp-badges {
+    gap: 10px !important;
+  }
+
+  .usp-badges > div {
+    padding: 10px 16px !important;
+    font-size: 13px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .section,
+  .section-alt {
+    padding: 48px 14px;
+  }
+
+  h2 {
+    font-size: 28px !important;
+  }
+}
+
