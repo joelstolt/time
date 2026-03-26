@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Star, Shield, Award, Leaf, Check, ArrowLeft } from "lucide-react";
 import { useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 
 /* ══════════════════ PRICING DATA ══════════════════ */
 
@@ -243,7 +244,9 @@ export default function Hero() {
 
   return (
     <section style={{ position: "relative", minHeight: "auto", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-      <motion.div style={{ position: "absolute", inset: "-20%", background: "var(--color-primary)", backgroundImage: "url('/hero-bg.jpg')", backgroundSize: "cover", backgroundPosition: "center", y: bgY }} />
+      <motion.div style={{ position: "absolute", inset: "-20%", background: "var(--color-primary)", y: bgY }}>
+        <Image src="/hero-bg.jpg" alt="" fill priority fetchPriority="high" sizes="100vw" style={{ objectFit: "cover" }} />
+      </motion.div>
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.35))" }} />
       <div style={{ position: "absolute", inset: 0, opacity: 0.06, backgroundImage: "repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(255,255,255,0.4) 20px, rgba(255,255,255,0.4) 21px)" }} />
       <div style={{ position: "absolute", top: "20%", left: "10%", width: "50%", height: "60%", background: "radial-gradient(ellipse, rgba(0,114,185,0.2) 0%, transparent 70%)", pointerEvents: "none" }} />
