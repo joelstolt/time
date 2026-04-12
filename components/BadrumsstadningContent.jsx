@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Phone, ChevronRight, Check, Sparkles, Droplets, Flame, ShieldCheck, Plus, Minus } from "lucide-react";
+import BeforeAfterGallery from "./BeforeAfterGallery";
 
 const priser = [
   { storlek: "1–10 m²", pris: "ca 1 200 kr" },
@@ -129,6 +130,9 @@ export default function BadrumsstadningContent() {
           </div>
         </div>
       </section>
+
+      {/* Före & efter */}
+      <BeforeAfterGallery />
 
       {/* Priser */}
       <section className="section">
