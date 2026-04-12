@@ -72,7 +72,10 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3003/sitemap.xml)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3003/robots.txt)",
       "Bash(curl -s http://localhost:3003)",
-      "Bash(curl -s http://localhost:3003/hemstadning)"
+      "Bash(curl -s http://localhost:3003/hemstadning)",
+      "Bash(curl -s https://time-eta-weld.vercel.app/sitemap.xml)",
+      "Bash(curl -s https://time-eta-weld.vercel.app/robots.txt)",
+      "Bash(curl -s https://time-eta-weld.vercel.app/)"
     ],
     "additionalDirectories": [
       "/Users/joelstolt/Desktop/Dev/clients/timeout/app"
