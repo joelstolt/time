@@ -240,11 +240,11 @@ export default function HemstadningContent() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-              <img src="/images/staff-kitchen.jpg" alt="Hemstädning kök Stockholm — Timeout Service" style={{ width: "100%", borderRadius: 12, aspectRatio: "1/1.2", objectFit: "cover" }} />
-              <img src="/images/staff-bedroom.jpg" alt="Hemstädning sovrum — bäddar säng" style={{ width: "100%", borderRadius: 12, aspectRatio: "1/1.2", objectFit: "cover" }} />
-              <img src="/images/staff-living-2.jpg" alt="Professionell hemstädning — moppning av golv" style={{ width: "100%", borderRadius: 12, aspectRatio: "2/1.1", objectFit: "cover", gridColumn: "1 / -1" }} />
-            </div>
+            <img
+              src="/images/tjanst-flytt.jpg"
+              alt="Hemstädning Stockholm — Timeout Service städar kök"
+              style={{ width: "100%", borderRadius: 12, aspectRatio: "3/4", objectFit: "cover", boxShadow: "0 20px 60px rgba(0,0,0,0.12)" }}
+            />
           </motion.div>
         </div>
       </Section>
