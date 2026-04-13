@@ -19,11 +19,11 @@ import {
 /* ──────────────────────── DATA ──────────────────────── */
 
 const lagenhetPriser = [
-  { rum: "1 rum", standard: "450 kr", sprojsade: "544 kr", kopplade: "632 kr" },
-  { rum: "2 rum", standard: "450 kr", sprojsade: "550 kr", kopplade: "660 kr" },
-  { rum: "3 rum", standard: "475 kr", sprojsade: "583 kr", kopplade: "726 kr" },
-  { rum: "4 rum", standard: "500 kr", sprojsade: "616 kr", kopplade: "800 kr" },
-  { rum: "5 rum", standard: "525 kr", sprojsade: "649 kr", kopplade: "880 kr" },
+  { rum: "1 rok. max 9 fönster", etGlas: "450 kr", tvaGlas: "500 kr", treGlas: "632 kr" },
+  { rum: "2 rok. max 11 fönster", etGlas: "450 kr", tvaGlas: "550 kr", treGlas: "660 kr" },
+  { rum: "3 rok. max 13 fönster", etGlas: "475 kr", tvaGlas: "575 kr", treGlas: "726 kr" },
+  { rum: "4 rok. max 15 fönster", etGlas: "500 kr", tvaGlas: "600 kr", treGlas: "800 kr" },
+  { rum: "5 rok. max 17 fönster", etGlas: "525 kr", tvaGlas: "625 kr", treGlas: "880 kr" },
 ];
 
 const villaPriser = [
@@ -167,33 +167,39 @@ export default function FonsterputsContent() {
       {/* Priser lägenhet */}
       <section className="section">
         <div className="container" style={{ maxWidth: 800 }}>
-          <SectionHeader tag="Priser fönsterputs" title="Priser för lägenhet" subtitle="Alla priser inkl. moms efter RUT-avdrag (50%). Materialavgift 100 kr tillkommer per tillfälle." />
+          <SectionHeader tag="Priser fönsterputs" title="Priser Lägenhet" subtitle="Alla priser inkl. moms efter RUT-avdrag (50%). Materialavgift 100 kr tillkommer per tillfälle." />
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
             style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--color-border)" }}>
             <div style={{ overflowX: "auto" }}>
-              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 15, minWidth: 500 }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 15, minWidth: 640 }}>
                 <thead>
                   <tr style={{ background: "var(--color-primary)", color: "white" }}>
-                    <th style={{ padding: "14px 20px", textAlign: "left", fontWeight: 600 }}>Storlek</th>
-                    <th style={{ padding: "14px 20px", textAlign: "left", fontWeight: 600 }}>Standard</th>
-                    <th style={{ padding: "14px 20px", textAlign: "left", fontWeight: 600 }}>Spröjsade</th>
-                    <th style={{ padding: "14px 20px", textAlign: "left", fontWeight: 600 }}>Kopplade</th>
+                    <th style={{ padding: "16px 20px", textAlign: "left", fontWeight: 600, verticalAlign: "top" }}>Antal fönster</th>
+                    <th style={{ padding: "16px 20px", textAlign: "left", fontWeight: 600, verticalAlign: "top", lineHeight: 1.4 }}>
+                      1 glas fönster,<br /><span style={{ fontWeight: 400, fontSize: 14, opacity: 0.9 }}>(2-sidig fönsterputs)</span>
+                    </th>
+                    <th style={{ padding: "16px 20px", textAlign: "left", fontWeight: 600, verticalAlign: "top", lineHeight: 1.4 }}>
+                      2 glas fönster,<br /><span style={{ fontWeight: 400, fontSize: 14, opacity: 0.9 }}>(4-sidig fönsterputs)</span>
+                    </th>
+                    <th style={{ padding: "16px 20px", textAlign: "left", fontWeight: 600, verticalAlign: "top", lineHeight: 1.4 }}>
+                      3 glas fönster,<br /><span style={{ fontWeight: 400, fontSize: 14, opacity: 0.9 }}>(6-sidig fönsterputs)</span>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {lagenhetPriser.map((row, i) => (
                     <tr key={row.rum} style={{ background: i % 2 === 0 ? "white" : "var(--color-bg-alt)" }}>
                       <td style={{ padding: "14px 20px", fontWeight: 600, color: "var(--color-heading)" }}>{row.rum}</td>
-                      <td style={{ padding: "14px 20px", color: "var(--color-body)" }}>{row.standard}</td>
-                      <td style={{ padding: "14px 20px", color: "var(--color-body)" }}>{row.sprojsade}</td>
-                      <td style={{ padding: "14px 20px", color: "var(--color-body)" }}>{row.kopplade}</td>
+                      <td style={{ padding: "14px 20px", color: "var(--color-body)" }}>{row.etGlas}</td>
+                      <td style={{ padding: "14px 20px", color: "var(--color-body)" }}>{row.tvaGlas}</td>
+                      <td style={{ padding: "14px 20px", color: "var(--color-body)" }}>{row.treGlas}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
             <div style={{ padding: "14px 20px", background: "var(--color-bg-alt)", fontSize: 14, color: "var(--color-muted)", borderTop: "1px solid var(--color-border)" }}>
-              Extra fönster: <strong>30 kr/st</strong> · Halvinglasad balkong: <strong>från 250 kr</strong> · Helinglasad balkong: <strong>från 350 kr</strong>
+              För extra fönster tillkommer avgift på <strong>30 kr/st</strong>
             </div>
           </motion.div>
         </div>
