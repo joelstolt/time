@@ -103,14 +103,36 @@ export default function BadrumsstadningContent() {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
-              <img src="/images/tjanst-badrum.jpg" alt="Badrumsstädning Stockholm — Timeout Service" style={{ width: "100%", borderRadius: 12, aspectRatio: "3/4", objectFit: "cover" }} />
+              <img src="/images/badrum-hero.jpg" alt="Timeout Service rengör badrum med industriell ångmaskin — Stockholm" style={{ width: "100%", borderRadius: 12, aspectRatio: "3/4", objectFit: "cover", boxShadow: "0 20px 60px rgba(0,0,0,0.12)" }} />
             </motion.div>
           </div>
         </div>
       </section>
 
+      {/* YouTube video — direkt efter hero på WordPress-sidan */}
+      <section className="section-alt" style={{ paddingTop: 40, paddingBottom: 40 }}>
+        <div className="container" style={{ maxWidth: 900 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            style={{ position: "relative", paddingBottom: "56.25%", height: 0, borderRadius: 12, overflow: "hidden", boxShadow: "0 10px 40px rgba(0,0,0,0.08)" }}
+          >
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/SBxRRVy_E70"
+              title="Timeout Service — Badrumsstädning med ångmaskin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              loading="lazy"
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
+            />
+          </motion.div>
+        </div>
+      </section>
+
       {/* Features */}
-      <section className="section-alt">
+      <section className="section">
         <div className="container">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="why-grid">
             {[
@@ -131,53 +153,79 @@ export default function BadrumsstadningContent() {
         </div>
       </section>
 
-      {/* Före & efter */}
-      <BeforeAfterGallery />
-
-      {/* Priser */}
+      {/* Priser — 2-kolumn layout (text vänster, bild höger) som WordPress */}
       <section className="section">
-        <div className="container" style={{ maxWidth: 700 }}>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: "center", marginBottom: 40 }}>
-            <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-primary)", marginBottom: 12, display: "block" }}>Priser badrumsstädning</span>
-            <h2 style={{ fontSize: "clamp(26px, 4vw, 38px)", marginBottom: 14 }}>Priser efter RUT-avdrag</h2>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-            style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--color-border)", marginBottom: 20 }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 16 }}>
-              <thead>
-                <tr style={{ background: "var(--color-primary)", color: "white" }}>
-                  <th style={{ padding: "16px 24px", textAlign: "left", fontWeight: 600 }}>Badrummets storlek</th>
-                  <th style={{ padding: "16px 24px", textAlign: "right", fontWeight: 600 }}>Pris efter RUT</th>
-                </tr>
-              </thead>
-              <tbody>
-                {priser.map((row, i) => (
-                  <tr key={row.storlek} style={{ background: i % 2 === 0 ? "white" : "var(--color-bg-alt)" }}>
-                    <td style={{ padding: "16px 24px", fontWeight: 500, color: "var(--color-heading)" }}>{row.storlek}</td>
-                    <td style={{ padding: "16px 24px", textAlign: "right", fontWeight: 700, color: "var(--color-primary)", fontSize: 18 }}>{row.pris}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </motion.div>
+        <div className="container">
+          <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 64, alignItems: "start" }} className="services-layout">
+            {/* Text + priser vänster */}
+            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+              <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-primary)", marginBottom: 12, display: "block" }}>Priser badrumsstädning</span>
+              <h2 style={{ fontSize: "clamp(26px, 4vw, 38px)", marginBottom: 16 }}>Våra priser</h2>
+              <p style={{ fontSize: 16, color: "var(--color-body)", lineHeight: 1.7, marginBottom: 24 }}>
+                Priserna varierar beroende på badrummets area och grundpris för städning utan tillägg är:
+              </p>
 
-          {/* Tillval */}
-          <div style={{ display: "grid", gap: 8 }}>
-            {tillval.map((t) => (
-              <div key={t.namn} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 18px", background: "var(--color-bg-alt)", borderRadius: 8, border: "1px solid var(--color-border)", fontSize: 15 }}>
-                <span style={{ color: "var(--color-body)" }}>{t.namn}</span>
-                <span style={{ fontWeight: 600, color: "var(--color-heading)", whiteSpace: "nowrap", marginLeft: 12 }}>{t.pris}</span>
+              {/* Pristabell */}
+              <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--color-border)", marginBottom: 28 }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 16 }}>
+                  <thead>
+                    <tr style={{ background: "var(--color-primary)", color: "white" }}>
+                      <th style={{ padding: "14px 20px", textAlign: "left", fontWeight: 600 }}>Badrummets storlek</th>
+                      <th style={{ padding: "14px 20px", textAlign: "right", fontWeight: 600 }}>Pris efter RUT</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {priser.map((row, i) => (
+                      <tr key={row.storlek} style={{ background: i % 2 === 0 ? "white" : "var(--color-bg-alt)" }}>
+                        <td style={{ padding: "14px 20px", fontWeight: 500, color: "var(--color-heading)" }}>{row.storlek}</td>
+                        <td style={{ padding: "14px 20px", textAlign: "right", fontWeight: 700, color: "var(--color-primary)", fontSize: 17 }}>{row.pris}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            ))}
-          </div>
 
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
-            style={{ marginTop: 20, padding: 20, background: "var(--color-accent-light)", border: "1px solid rgba(222,160,30,0.2)", borderRadius: 12, display: "flex", alignItems: "flex-start", gap: 12 }}>
-            <Sparkles size={18} style={{ color: "var(--color-accent)", flexShrink: 0, marginTop: 2 }} />
-            <p style={{ fontSize: 14, color: "var(--color-muted)", lineHeight: 1.6 }}>
-              <strong style={{ color: "var(--color-heading)" }}>Tips:</strong> Kombinera badrumsstädning med köksstädning och få ett komplett resultat.
-            </p>
-          </motion.div>
+              {/* Tillägg */}
+              <h3 style={{ fontSize: 18, marginBottom: 12 }}>Tillägg:</h3>
+              <div style={{ display: "grid", gap: 8, marginBottom: 24 }}>
+                {tillval.map((t) => (
+                  <div key={t.namn} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", background: "var(--color-bg-alt)", borderRadius: 8, fontSize: 15 }}>
+                    <span style={{ color: "var(--color-body)" }}>{t.namn}</span>
+                    <span style={{ fontWeight: 700, color: "var(--color-primary)", whiteSpace: "nowrap", marginLeft: 12 }}>{t.pris}</span>
+                  </div>
+                ))}
+              </div>
+
+              <p style={{ fontSize: 15, color: "var(--color-muted)", lineHeight: 1.7, marginBottom: 20 }}>
+                Exakt pris kommer vi överens om på plats vid det inledande besöket där även tillval och extra tjänster kan diskuteras. Använd <a href="#priskalkylator" style={{ color: "var(--color-primary)", fontWeight: 600 }}>priskalkylatorn</a> på startsidan för en prisidé, eller <a href="/kontakt" style={{ color: "var(--color-primary)", fontWeight: 600 }}>kontakta oss</a> för att boka ett besök.
+              </p>
+
+              <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+                style={{ padding: 20, background: "var(--color-accent-light)", border: "1px solid rgba(222,160,30,0.2)", borderRadius: 12, display: "flex", alignItems: "flex-start", gap: 12 }}>
+                <Sparkles size={18} style={{ color: "var(--color-accent)", flexShrink: 0, marginTop: 2 }} />
+                <p style={{ fontSize: 14, color: "var(--color-muted)", lineHeight: 1.6 }}>
+                  <strong style={{ color: "var(--color-heading)" }}>Tips:</strong> Kombinera badrumsstädning med köksstädning och få ett komplett resultat.
+                </p>
+              </motion.div>
+            </motion.div>
+
+            {/* Bild höger — sticky på desktop */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              style={{ position: "sticky", top: 100 }}
+              className="priser-sticky-image"
+            >
+              <img
+                src="/images/badrum-man.jpg"
+                alt="Timeout Service städar duschkabin — professionell badrumsstädning"
+                loading="lazy"
+                style={{ width: "100%", borderRadius: 16, aspectRatio: "3/4", objectFit: "cover", boxShadow: "0 20px 60px rgba(0,0,0,0.12)" }}
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -217,6 +265,9 @@ export default function BadrumsstadningContent() {
           </div>
         </div>
       </section>
+
+      {/* Före & efter — efter FAQ som på WordPress-sidan */}
+      <BeforeAfterGallery />
 
       {/* CTA */}
       <section style={{ background: "var(--color-primary)", position: "relative", overflow: "hidden" }}>

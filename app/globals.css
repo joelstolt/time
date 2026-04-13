@@ -276,6 +276,15 @@ input:focus, select:focus, textarea:focus {
   z-index: 9999;
 }
 
+/* Disable sticky on mobile where sidebar becomes full-width */
+@media (max-width: 768px) {
+  .priser-sticky-image {
+    position: static !important;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
 /* Section spacing */
 .section {
   padding: 100px 20px;
