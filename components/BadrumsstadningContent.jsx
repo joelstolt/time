@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Phone, ChevronRight, Check, Sparkles, Droplets, Flame, ShieldCheck, Plus, Minus } from "lucide-react";
+import { ArrowRight, Phone, ChevronRight, Check, Sparkles, Droplets, Flame, ShieldCheck, Plus, Minus, Camera } from "lucide-react";
 import BeforeAfterGallery from "./BeforeAfterGallery";
 
 const priser = [
@@ -199,6 +199,14 @@ export default function BadrumsstadningContent() {
               <p style={{ fontSize: 15, color: "var(--color-muted)", lineHeight: 1.7, marginBottom: 20 }}>
                 Exakt pris kommer vi överens om på plats vid det inledande besöket där även tillval och extra tjänster kan diskuteras. Använd <a href="#priskalkylator" style={{ color: "var(--color-primary)", fontWeight: 600 }}>priskalkylatorn</a> på startsidan för en prisidé, eller <a href="/kontakt" style={{ color: "var(--color-primary)", fontWeight: 600 }}>kontakta oss</a> för att boka ett besök.
               </p>
+
+              <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+                style={{ padding: 20, background: "var(--color-primary-light, rgba(0,0,0,0.03))", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 12, display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 20 }}>
+                <Camera size={18} style={{ color: "var(--color-primary)", flexShrink: 0, marginTop: 2 }} />
+                <p style={{ fontSize: 14, color: "var(--color-muted)", lineHeight: 1.6 }}>
+                  <strong style={{ color: "var(--color-heading)" }}>Viktigt:</strong> För att kunna ge en korrekt prisuppskattning behöver vi bilder på badrummet. Skicka gärna foton via <a href="/kontakt" style={{ color: "var(--color-primary)", fontWeight: 600 }}>kontaktformuläret</a> eller mejla dem till <a href="mailto:info@timeoutservice.se" style={{ color: "var(--color-primary)", fontWeight: 600 }}>info@timeoutservice.se</a> — gärna översikt samt närbilder på fogar, duschhörna och toalett.
+                </p>
+              </motion.div>
 
               <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
                 style={{ padding: 20, background: "var(--color-accent-light)", border: "1px solid rgba(222,160,30,0.2)", borderRadius: 12, display: "flex", alignItems: "flex-start", gap: 12 }}>

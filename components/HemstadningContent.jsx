@@ -112,7 +112,7 @@ const faqs = [
   { q: "Är Timeout Service personalen tillförlitlig?", a: "Vår personal kontrolleras mot polisens belastningsregister samt undertecknar avtal om tystnadsplikt. De bär alltid Timeout Service AB uniform och har företagslegitimation." },
   { q: "Är det alltid samma person som kommer och städar?", a: "Ja, med oss är det alltid samma person som kommer, utom vid sjukdom eller semester. Då skickar vi en vikarie istället." },
   { q: "Måste jag lämna ut nycklar?", a: "Nej, om du garanterar att alltid vara hemma när städningen påbörjas och avslutas behöver vi ingen nyckel." },
-  { q: "Måste jag ha städutrustning och rengöringsmedel?", a: "Vid start får du ett städpaket med mikrofibertrasor och moppskaft. Våra städmedel som är märkta med 'Bra miljöval' fylls på när de tar slut. Vi använder bara din dammsugare." },
+  { q: "Måste jag ha städutrustning och rengöringsmedel?", a: "Vid start får du ett städpaket med redskap — mikrofibertrasor, moppskaft, hink med mera. Du står själv för rengöringsmedel och dammsugare." },
   { q: "Vad händer om något skulle råka gå sönder?", a: "Timeout Service AB är ansvarsförsäkrad upp till 10 miljoner kronor. Om skadan uppkommit genom att vi har varit oaktsamma står vi självklart för kostnaden." },
   { q: "Hur betalar jag?", a: "Vi skickar faktura via e-post, vilket är kostnadsfritt. Det går även bra att betala med Swish. Betalningsvillkoren är 10 dagar. Vi administrerar ditt RUT-avdrag utan extra kostnad." },
 ];
@@ -241,8 +241,8 @@ export default function HemstadningContent() {
 
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
             <img
-              src="/images/tjanst-flytt.jpg"
-              alt="Hemstädning Stockholm — Timeout Service städar kök"
+              src="/images/hemstadning.png"
+              alt="Hemstädning Stockholm — Timeout Service"
               style={{ width: "100%", borderRadius: 12, aspectRatio: "3/4", objectFit: "cover", boxShadow: "0 20px 60px rgba(0,0,0,0.12)" }}
             />
           </motion.div>

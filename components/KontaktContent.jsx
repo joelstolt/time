@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Clock, ChevronRight, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { Phone, Mail, MapPin, Clock, ChevronRight, ChevronDown, Paperclip, X } from "lucide-react";
 
 const arenden = [
   "Boka städning",
@@ -22,6 +23,12 @@ const inputStyle = {
 export default function KontaktContent() {
   const focus = (e) => (e.target.style.borderColor = "var(--color-primary)");
   const blur = (e) => (e.target.style.borderColor = "var(--color-border)");
+  const [files, setFiles] = useState([]);
+  const handleFiles = (e) => {
+    const picked = Array.from(e.target.files || []);
+    setFiles((prev) => [...prev, ...picked].slice(0, 10));
+  };
+  const removeFile = (i) => setFiles((prev) => prev.filter((_, idx) => idx !== i));
 
   return (
     <>
@@ -74,6 +81,30 @@ export default function KontaktContent() {
                 <div>
                   <label style={{ display: "block", fontSize: 14, fontWeight: 600, color: "var(--color-heading)", marginBottom: 6 }}>Meddelande</label>
                   <textarea rows={5} placeholder="Berätta vad du behöver hjälp med..." style={{ ...inputStyle, resize: "vertical" }} onFocus={focus} onBlur={blur} />
+                </div>
+
+                <div>
+                  <label style={{ display: "block", fontSize: 14, fontWeight: 600, color: "var(--color-heading)", marginBottom: 6 }}>Bifoga bilder (valfritt)</label>
+                  <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: 14, border: "2px dashed var(--color-border)", borderRadius: 10, cursor: "pointer", background: "white", fontSize: 14, color: "var(--color-muted)", transition: "border-color 0.2s" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--color-primary)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.borderColor = "var(--color-border)")}>
+                    <Paperclip size={16} />
+                    <span>Klicka för att välja bilder eller släpp filer här</span>
+                    <input type="file" accept="image/*" multiple onChange={handleFiles} style={{ display: "none" }} />
+                  </label>
+                  <p style={{ fontSize: 12, color: "var(--color-muted)", marginTop: 6 }}>Max 10 bilder. JPG, PNG eller HEIC.</p>
+                  {files.length > 0 && (
+                    <ul style={{ listStyle: "none", padding: 0, margin: "12px 0 0", display: "grid", gap: 6 }}>
+                      {files.map((f, i) => (
+                        <li key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "8px 12px", background: "var(--color-bg-alt)", borderRadius: 8, fontSize: 13 }}>
+                          <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name} <span style={{ color: "var(--color-muted)" }}>({(f.size / 1024).toFixed(0)} kB)</span></span>
+                          <button type="button" onClick={() => removeFile(i)} aria-label="Ta bort" style={{ background: "transparent", border: "none", cursor: "pointer", color: "var(--color-muted)", display: "flex", alignItems: "center" }}>
+                            <X size={16} />
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
 
                 <button type="submit" className="btn-primary" style={{ width: "100%", justifyContent: "center", padding: 18, fontSize: 16 }}>

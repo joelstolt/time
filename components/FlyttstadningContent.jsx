@@ -226,8 +226,9 @@ export default function FlyttstadningContent() {
             </p>
           </motion.div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }} className="why-grid">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16 }} className="why-grid">
             {[
+              { src: "/images/flytt-team.jpg", alt: "Timeout Service team — flyttstädning Stockholm" },
               { src: "/images/flytt-hero.jpg", alt: "Timeout Service städar handdukstork i badrum vid flyttstädning" },
               { src: "/images/staff-kitchen.jpg", alt: "Timeout Service rengör köksfläkt" },
               { src: "/images/staff-bedroom.jpg", alt: "Timeout Service bäddar säng i sovrum" },
