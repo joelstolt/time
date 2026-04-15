@@ -49,7 +49,8 @@ const SERVICES = {
       { id: "ugn", label: "Sanera ugn", price: 300 },
       { id: "angmaskin", label: "Ångmaskin", price: 400 },
       { id: "mattvatt", label: "Mattvätt - 100 kr/kvm", price: 0, isManual: true },
-      { id: "helg", label: "Städas på helg / röd dag", price: 500 },
+      { id: "lordag", label: "Städas på lördag", price: 800 },
+      { id: "sondag", label: "Städas på söndag / röd dag", price: 1000 },
     ],
   },
   storstadning: {

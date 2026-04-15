@@ -63,9 +63,8 @@ const tillval = [
   { namn: "Tredje glasruta", pris: "+30 kr/ruta" },
   { namn: "Utåtgående fönster", pris: "+20 kr/fönster" },
   { namn: "Spröjsade fönster", pris: "+30 kr/fönster" },
-  { namn: "Helg lördag", pris: "+500 kr" },
-  { namn: "Helg söndag", pris: "+800 kr" },
-  { namn: "Röd dag", pris: "+1 000 kr" },
+  { namn: "Lördag", pris: "+800 kr" },
+  { namn: "Söndag / röd dag", pris: "+1 000 kr" },
 ];
 
 const ejIngar = [
