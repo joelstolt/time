@@ -194,7 +194,7 @@ export default function FlyttstadningContent() {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
-              <img src="/images/flytt-hoger.png" alt="Flyttstädning Stockholm — Timeout Service team på plats" style={{ width: "100%", borderRadius: 12, aspectRatio: "3/4", objectFit: "cover", boxShadow: "0 20px 60px rgba(0,0,0,0.12)" }} />
+              <img src="/images/flytt-hero.jpg" alt="Flyttstädning Stockholm — Timeout Service" style={{ width: "100%", borderRadius: 12, aspectRatio: "4/3", objectFit: "cover", boxShadow: "0 20px 60px rgba(0,0,0,0.12)" }} />
             </motion.div>
           </div>
         </div>
@@ -212,47 +212,6 @@ export default function FlyttstadningContent() {
             </p>
             <p style={{ fontSize: 14, fontWeight: 600, color: "var(--color-primary)" }}>— Notar Mäklare</p>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Bildgalleri — I arbete */}
-      <section className="section">
-        <div className="container">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: "center", marginBottom: 40 }}>
-            <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-primary)", marginBottom: 12, display: "block" }}>I arbete</span>
-            <h2 style={{ fontSize: "clamp(26px, 4vw, 38px)", marginBottom: 14 }}>Vårt team på plats</h2>
-            <p style={{ fontSize: 16, color: "var(--color-muted)", maxWidth: 600, margin: "0 auto", lineHeight: 1.6 }}>
-              Vår personal jobbar alltid enligt mäklarsamfundets riktlinjer — från golv till tak.
-            </p>
-          </motion.div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16 }} className="why-grid">
-            {[
-              { src: "/images/flytt-team.jpg", alt: "Timeout Service team — flyttstädning Stockholm" },
-              { src: "/images/flytt-hero.jpg", alt: "Timeout Service städar handdukstork i badrum vid flyttstädning" },
-              { src: "/images/staff-kitchen.jpg", alt: "Timeout Service rengör köksfläkt" },
-              { src: "/images/staff-bedroom.jpg", alt: "Timeout Service bäddar säng i sovrum" },
-              { src: "/images/staff-living-2.jpg", alt: "Timeout Service moppar golv i vardagsrum" },
-            ].map((img, i) => (
-              <motion.div
-                key={img.src}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                style={{ borderRadius: 12, overflow: "hidden", aspectRatio: "3/4" }}
-              >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  loading="lazy"
-                  style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s ease" }}
-                  onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
-                  onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
-                />
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
