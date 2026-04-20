@@ -14,7 +14,7 @@ export default function Integritetspolicy() {
 
           <div style={{ fontSize: 16, color: "var(--color-body)", lineHeight: 1.8 }}>
             <h2 style={{ fontSize: 22, marginTop: 32, marginBottom: 12 }}>1. Inledning</h2>
-            <p>Timeout Service AB (org.nr: 556XXX-XXXX) värnar om din personliga integritet. Denna policy beskriver hur vi samlar in, använder och skyddar dina personuppgifter i enlighet med EU:s dataskyddsförordning (GDPR).</p>
+            <p>Timeout Service AB (org.nr: {/* TODO: fyll i org.nr innan lansering */}) värnar om din personliga integritet. Denna policy beskriver hur vi samlar in, använder och skyddar dina personuppgifter i enlighet med EU:s dataskyddsförordning (GDPR).</p>
 
             <h2 style={{ fontSize: 22, marginTop: 32, marginBottom: 12 }}>2. Personuppgiftsansvarig</h2>
             <p>Timeout Service AB<br />Terrängvägen 43<br />129 48 Hägersten<br />E-post: info@timeoutservice.se<br />Telefon: 08-37 71 76</p>

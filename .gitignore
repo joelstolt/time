@@ -20,3 +20,6 @@
 
 # debug
 npm-debug.log*
+
+# WordPress-export som inte hör hemma i repo
+timeoutservice.se.*.md

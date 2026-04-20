@@ -1,9 +1,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Check } from "lucide-react";
 
 const services = [
   "Hemstädning",
@@ -22,6 +22,26 @@ function BookingFormInner() {
   const searchParams = useSearchParams();
   const preService = searchParams.get("tjanst") || "";
   const preSqm = searchParams.get("kvm") || "";
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (status === "sending") return;
+
+    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  };
 
   const inputStyle = {
     width: "100%",
@@ -65,9 +85,17 @@ function BookingFormInner() {
                 Fyll i dina uppgifter så kontaktar vi dig inom kort. Alla fält markerade med * är obligatoriska.
               </p>
 
+              {status === "sent" ? (
+                <div style={{ padding: "48px 24px", background: "var(--color-bg-alt)", border: "1px solid var(--color-border-light)", borderRadius: 16, textAlign: "center" }}>
+                  <div style={{ width: 56, height: 56, borderRadius: "50%", background: "var(--color-primary-light)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
+                    <Check size={28} color="var(--color-primary)" />
+                  </div>
+                  <h2 style={{ fontSize: 22, marginBottom: 8 }}>Tack för din bokning!</h2>
+                  <p style={{ fontSize: 15, color: "var(--color-muted)" }}>Vi kontaktar dig inom kort.</p>
+                </div>
+              ) : (
               <form
-                action="https://formspree.io/f/placeholder"
-                method="POST"
+                onSubmit={handleSubmit}
                 style={{ display: "grid", gap: 20 }}
               >
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="hero-form-grid">
@@ -129,14 +157,24 @@ function BookingFormInner() {
                   <textarea name="meddelande" rows={4} style={{ ...inputStyle, resize: "vertical" }} placeholder="Berätta mer om vad du behöver hjälp med..." onFocus={(e) => (e.target.style.borderColor = "var(--color-primary)")} onBlur={(e) => (e.target.style.borderColor = "var(--color-border)")} />
                 </div>
 
-                <button type="submit" className="btn-primary" style={{ width: "100%", justifyContent: "center", padding: "18px", fontSize: 16 }}>
-                  Skicka bokningsförfrågan
+                {/* Honeypot mot bot-submissions */}
+                <input type="text" name="company" tabIndex={-1} autoComplete="off" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} aria-hidden="true" />
+
+                {status === "error" && (
+                  <p style={{ color: "var(--color-primary)", fontSize: 14, textAlign: "center", margin: 0 }}>
+                    Något gick fel. Försök igen eller ring oss direkt på 08-37 71 76.
+                  </p>
+                )}
+
+                <button type="submit" className="btn-primary" disabled={status === "sending"} style={{ width: "100%", justifyContent: "center", padding: "18px", fontSize: 16, opacity: status === "sending" ? 0.6 : 1 }}>
+                  {status === "sending" ? "Skickar…" : "Skicka bokningsförfrågan"}
                 </button>
 
                 <p style={{ fontSize: 13, color: "var(--color-faint)", textAlign: "center" }}>
                   Genom att skicka godkänner du vår <a href="/integritetspolicy" style={{ color: "var(--color-primary)" }}>integritetspolicy</a>.
                 </p>
               </form>
+              )}
             </motion.div>
 
             {/* Sidebar */}

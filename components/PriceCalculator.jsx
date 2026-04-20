@@ -244,6 +244,7 @@ export default function PriceCalculator() {
   const [frequency, setFrequency] = useState(null);
   const [selectedAddons, setSelectedAddons] = useState([]);
   const [formSent, setFormSent] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState("idle"); // idle | sending | error
 
   const service = serviceId ? SERVICES[serviceId] : null;
 
@@ -276,6 +277,46 @@ export default function PriceCalculator() {
   const canAdvanceStep2 = service?.hasFrequency ? !!frequency : true;
 
   const formatPrice = (n) => n.toLocaleString("sv-SE");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (submitStatus === "sending") return;
+
+    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    const selectedAddonLabels = selectedAddons
+      .map((id) => service?.addons?.find((a) => a.id === id)?.label)
+      .filter(Boolean);
+    const freqLabel = frequency
+      ? service?.frequencies?.find((f) => f.id === frequency)?.label
+      : null;
+    const pris =
+      result?.type === "price"
+        ? `${formatPrice(result.total)} ${result.unit}`
+        : null;
+
+    const payload = {
+      ...data,
+      tjanst: service?.label,
+      kvm: sqmNum || null,
+      frekvens: freqLabel,
+      tillval: selectedAddonLabels,
+      pris,
+    };
+
+    setSubmitStatus("sending");
+    try {
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setFormSent(true);
+      setSubmitStatus("idle");
+    } catch {
+      setSubmitStatus("error");
+    }
+  };
 
   return (
     <section id="priskalkylator" className="section-alt">
@@ -553,7 +594,7 @@ export default function PriceCalculator() {
                           <span style={{ fontWeight: 700, color: "var(--color-primary)", fontSize: 16 }}>{formatPrice(result.total)} {result.unit}</span>
                         )}
                       </div>
-                      <form onSubmit={(e) => { e.preventDefault(); setFormSent(true); }} style={{ display: "grid", gap: 12 }}>
+                      <form onSubmit={handleSubmit} style={{ display: "grid", gap: 12 }}>
                         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }} className="hero-form-grid">
                           <input name="fornamn" required placeholder="Förnamn *" style={{ width: "100%", padding: "14px 16px", fontSize: 15, border: "2px solid var(--color-border)", borderRadius: 10, outline: "none", fontFamily: "var(--font-body)" }} />
                           <input name="efternamn" required placeholder="Efternamn *" style={{ width: "100%", padding: "14px 16px", fontSize: 15, border: "2px solid var(--color-border)", borderRadius: 10, outline: "none", fontFamily: "var(--font-body)" }} />
@@ -571,8 +612,18 @@ export default function PriceCalculator() {
                           <input name="datum" type="text" placeholder="Önskat datum" onFocus={(e) => (e.target.type = "date")} style={{ width: "100%", padding: "14px 16px", fontSize: 15, border: "2px solid var(--color-border)", borderRadius: 10, outline: "none", fontFamily: "var(--font-body)" }} />
                         </div>
                         <textarea name="meddelande" rows={3} placeholder="Meddelande" style={{ width: "100%", padding: "14px 16px", fontSize: 15, border: "2px solid var(--color-border)", borderRadius: 10, outline: "none", fontFamily: "var(--font-body)", resize: "vertical" }} />
-                        <button type="submit" className="btn-accent" style={{ width: "100%", justifyContent: "center", padding: 16, border: "none", cursor: "pointer", fontSize: 16 }}>
-                          Skicka bokningsförfrågan
+
+                        {/* Honeypot mot bot-submissions */}
+                        <input type="text" name="company" tabIndex={-1} autoComplete="off" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} aria-hidden="true" />
+
+                        {submitStatus === "error" && (
+                          <p style={{ color: "var(--color-primary)", fontSize: 13, textAlign: "center", margin: 0 }}>
+                            Något gick fel. Försök igen eller ring oss direkt.
+                          </p>
+                        )}
+
+                        <button type="submit" className="btn-accent" disabled={submitStatus === "sending"} style={{ width: "100%", justifyContent: "center", padding: 16, border: "none", cursor: submitStatus === "sending" ? "default" : "pointer", fontSize: 16, opacity: submitStatus === "sending" ? 0.6 : 1 }}>
+                          {submitStatus === "sending" ? "Skickar…" : "Skicka bokningsförfrågan"}
                         </button>
                       </form>
                     </>

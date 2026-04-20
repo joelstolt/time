@@ -199,6 +199,7 @@ export default function Hero() {
   const [frequency, setFrequency] = useState(null);
   const [selectedAddons, setSelectedAddons] = useState([]);
   const [formSent, setFormSent] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState("idle"); // idle | sending | error
 
   const service = serviceId ? SERVICES[serviceId] : null;
   const sqmNum = parseInt(sqm) || 0;
@@ -218,9 +219,42 @@ export default function Hero() {
     else if (step === 1) setStep(0);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSent(true);
+    if (submitStatus === "sending") return;
+
+    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    const selectedAddonLabels = selectedAddons
+      .map((id) => service?.addons?.find((a) => a.id === id)?.label)
+      .filter(Boolean);
+    const freqLabel = frequency
+      ? service?.frequencies?.find((f) => f.id === frequency)?.label
+      : null;
+    const pris =
+      result?.type === "price" ? `${fmt(result.total)} ${result.unit}` : null;
+
+    const payload = {
+      ...data,
+      tjanst: service?.label,
+      kvm: sqmNum || null,
+      frekvens: freqLabel,
+      tillval: selectedAddonLabels,
+      pris,
+    };
+
+    setSubmitStatus("sending");
+    try {
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setFormSent(true);
+      setSubmitStatus("idle");
+    } catch {
+      setSubmitStatus("error");
+    }
   };
 
   // Determine if service needs a different input label
@@ -416,12 +450,21 @@ export default function Hero() {
                     </div>
                     <textarea name="meddelande" rows={3} placeholder="Meddelande" style={{ ...inputStyle, resize: "vertical", marginBottom: 16 }} />
 
+                    {/* Honeypot mot bot-submissions */}
+                    <input type="text" name="company" tabIndex={-1} autoComplete="off" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} aria-hidden="true" />
+
+                    {submitStatus === "error" && (
+                      <p style={{ color: "#ffdddd", fontSize: 13, marginBottom: 12, textAlign: "center" }}>
+                        Något gick fel. Försök igen eller ring oss direkt.
+                      </p>
+                    )}
+
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <button type="button" onClick={handleBack} style={{ padding: "12px 20px", background: "rgba(255,255,255,0.15)", border: "none", borderRadius: 8, color: "white", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, fontFamily: "var(--font-body)" }}>
+                      <button type="button" onClick={handleBack} disabled={submitStatus === "sending"} style={{ padding: "12px 20px", background: "rgba(255,255,255,0.15)", border: "none", borderRadius: 8, color: "white", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, fontFamily: "var(--font-body)" }}>
                         <ArrowLeft size={16} /> Gå tillbaka
                       </button>
-                      <button type="submit" className="btn-accent" style={{ padding: "12px 36px" }}>
-                        Boka
+                      <button type="submit" className="btn-accent" disabled={submitStatus === "sending"} style={{ padding: "12px 36px", opacity: submitStatus === "sending" ? 0.6 : 1 }}>
+                        {submitStatus === "sending" ? "Skickar…" : "Boka"}
                       </button>
                     </div>
                   </form>
