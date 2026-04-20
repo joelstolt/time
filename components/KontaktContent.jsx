@@ -24,11 +24,37 @@ export default function KontaktContent() {
   const focus = (e) => (e.target.style.borderColor = "var(--color-primary)");
   const blur = (e) => (e.target.style.borderColor = "var(--color-border)");
   const [files, setFiles] = useState([]);
+  const [form, setForm] = useState({ namn: "", email: "", telefon: "", arende: "", meddelande: "" });
+  const [status, setStatus] = useState({ state: "idle", error: "" });
   const handleFiles = (e) => {
     const picked = Array.from(e.target.files || []);
     setFiles((prev) => [...prev, ...picked].slice(0, 10));
   };
   const removeFile = (i) => setFiles((prev) => prev.filter((_, idx) => idx !== i));
+  const update = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (status.state === "loading") return;
+    setStatus({ state: "loading", error: "" });
+    try {
+      const data = new FormData();
+      data.append("namn", form.namn);
+      data.append("email", form.email);
+      data.append("telefon", form.telefon);
+      data.append("arende", form.arende);
+      data.append("meddelande", form.meddelande);
+      files.forEach((f) => data.append("files", f));
+      const res = await fetch("/api/kontakt", { method: "POST", body: data });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(json.error || "Något gick fel.");
+      setStatus({ state: "success", error: "" });
+      setForm({ namn: "", email: "", telefon: "", arende: "", meddelande: "" });
+      setFiles([]);
+    } catch (err) {
+      setStatus({ state: "error", error: err.message });
+    }
+  };
 
   return (
     <>
@@ -49,27 +75,27 @@ export default function KontaktContent() {
                 Har du några frågor? Tveka inte på att kontakta oss. Fyll i formuläret så återkommer vi inom kort.
               </p>
 
-              <form style={{ display: "grid", gap: 16 }}>
+              <form onSubmit={onSubmit} style={{ display: "grid", gap: 16 }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="hero-form-grid">
                   <div>
                     <label style={{ display: "block", fontSize: 14, fontWeight: 600, color: "var(--color-heading)", marginBottom: 6 }}>Namn *</label>
-                    <input required placeholder="Ditt namn" style={inputStyle} onFocus={focus} onBlur={blur} />
+                    <input required placeholder="Ditt namn" value={form.namn} onChange={update("namn")} style={inputStyle} onFocus={focus} onBlur={blur} />
                   </div>
                   <div>
                     <label style={{ display: "block", fontSize: 14, fontWeight: 600, color: "var(--color-heading)", marginBottom: 6 }}>E-post *</label>
-                    <input type="email" required placeholder="din@email.se" style={inputStyle} onFocus={focus} onBlur={blur} />
+                    <input type="email" required placeholder="din@email.se" value={form.email} onChange={update("email")} style={inputStyle} onFocus={focus} onBlur={blur} />
                   </div>
                 </div>
 
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="hero-form-grid">
                   <div>
                     <label style={{ display: "block", fontSize: 14, fontWeight: 600, color: "var(--color-heading)", marginBottom: 6 }}>Telefon *</label>
-                    <input type="tel" required placeholder="07X-XXX XX XX" style={inputStyle} onFocus={focus} onBlur={blur} />
+                    <input type="tel" required placeholder="07X-XXX XX XX" value={form.telefon} onChange={update("telefon")} style={inputStyle} onFocus={focus} onBlur={blur} />
                   </div>
                   <div>
                     <label style={{ display: "block", fontSize: 14, fontWeight: 600, color: "var(--color-heading)", marginBottom: 6 }}>Ditt ärende</label>
                     <div style={{ position: "relative" }}>
-                      <select style={{ ...inputStyle, appearance: "none", cursor: "pointer", paddingRight: 40 }} onFocus={focus} onBlur={blur}>
+                      <select value={form.arende} onChange={update("arende")} style={{ ...inputStyle, appearance: "none", cursor: "pointer", paddingRight: 40 }} onFocus={focus} onBlur={blur}>
                         <option value="">Välj ärende...</option>
                         {arenden.map((a) => <option key={a} value={a}>{a}</option>)}
                       </select>
@@ -80,7 +106,7 @@ export default function KontaktContent() {
 
                 <div>
                   <label style={{ display: "block", fontSize: 14, fontWeight: 600, color: "var(--color-heading)", marginBottom: 6 }}>Meddelande</label>
-                  <textarea rows={5} placeholder="Berätta vad du behöver hjälp med..." style={{ ...inputStyle, resize: "vertical" }} onFocus={focus} onBlur={blur} />
+                  <textarea rows={5} placeholder="Berätta vad du behöver hjälp med..." value={form.meddelande} onChange={update("meddelande")} style={{ ...inputStyle, resize: "vertical" }} onFocus={focus} onBlur={blur} />
                 </div>
 
                 <div>
@@ -92,7 +118,7 @@ export default function KontaktContent() {
                     <span>Klicka för att välja bilder eller släpp filer här</span>
                     <input type="file" accept="image/*" multiple onChange={handleFiles} style={{ display: "none" }} />
                   </label>
-                  <p style={{ fontSize: 12, color: "var(--color-muted)", marginTop: 6 }}>Max 10 bilder. JPG, PNG eller HEIC.</p>
+                  <p style={{ fontSize: 12, color: "var(--color-muted)", marginTop: 6 }}>Max 10 bilder, 4 MB per bild. JPG, PNG eller HEIC.</p>
                   {files.length > 0 && (
                     <ul style={{ listStyle: "none", padding: 0, margin: "12px 0 0", display: "grid", gap: 6 }}>
                       {files.map((f, i) => (
@@ -107,9 +133,20 @@ export default function KontaktContent() {
                   )}
                 </div>
 
-                <button type="submit" className="btn-primary" style={{ width: "100%", justifyContent: "center", padding: 18, fontSize: 16 }}>
-                  Skicka meddelande
+                <button type="submit" disabled={status.state === "loading"} className="btn-primary" style={{ width: "100%", justifyContent: "center", padding: 18, fontSize: 16, opacity: status.state === "loading" ? 0.7 : 1, cursor: status.state === "loading" ? "wait" : "pointer" }}>
+                  {status.state === "loading" ? "Skickar..." : "Skicka meddelande"}
                 </button>
+
+                {status.state === "success" && (
+                  <div role="status" style={{ padding: 14, borderRadius: 10, background: "var(--color-primary-light, rgba(0,114,185,0.08))", color: "var(--color-primary)", fontSize: 14, fontWeight: 600 }}>
+                    Tack! Meddelandet är skickat — vi återkommer inom kort.
+                  </div>
+                )}
+                {status.state === "error" && (
+                  <div role="alert" style={{ padding: 14, borderRadius: 10, background: "rgba(220,38,38,0.08)", color: "#dc2626", fontSize: 14, fontWeight: 600 }}>
+                    {status.error || "Något gick fel. Försök igen eller ring oss direkt."}
+                  </div>
+                )}
               </form>
             </motion.div>
 
