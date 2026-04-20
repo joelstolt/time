@@ -182,6 +182,7 @@ const SERVICES = {
     addons: [
       { id: "ugn", label: "Sanera ugn invändigt (ink. plåtar & galler)", price: 400 },
       { id: "vaggar", label: "Tvätta väggar/tak — 250 kr/tim", price: 0, isManual: true },
+      { id: "lordag", label: "Städas på lördag", price: 500 },
     ],
   },
 };
