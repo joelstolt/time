@@ -70,8 +70,9 @@ const SERVICES = {
       { id: "ugn", label: "Sanera ugn invändigt", price: 285 },
       { id: "kamin", label: "kamin/öppen spis - 400 kr/st", price: 400 },
       { id: "mattvatt", label: "Mattvätt - 99 kr/kvm", price: 0, isManual: true },
-      { id: "helg", label: "Städ på helg / röd dag", price: 485 },
       { id: "angmaskin", label: "Tillägg ångmaskin", price: 450 },
+      { id: "lordag", label: "Städas på lördag", price: 800 },
+      { id: "sondag", label: "Städas på söndag / röd dag", price: 1000 },
     ],
   },
   badrumstvatt: {
@@ -87,6 +88,7 @@ const SERVICES = {
       { id: "mogel", label: "Mögelsanering 400 kr/tim", price: 0, isManual: true },
       { id: "kalk", label: "Svår kalk 400 kr/tim", price: 0, isManual: true },
       { id: "fogar", label: "Djuprengöring fogar 400 kr/tim", price: 0, isManual: true },
+      { id: "lordag", label: "Städas på lördag", price: 500 },
     ],
   },
   koksstadning: {
@@ -121,7 +123,8 @@ const SERVICES = {
       { id: "ugn", label: "Sanera ugn invändigt", price: 300 },
       { id: "kamin", label: "kamin/öppen spis 400 kr/st", price: 400 },
       { id: "mattvatt", label: "Mattvätt - 100 kr/kvm", price: 0, isManual: true },
-      { id: "helg", label: "Städas på helg / röd dag", price: 502 },
+      { id: "lordag", label: "Städas på lördag", price: 800 },
+      { id: "sondag", label: "Städas på söndag / röd dag", price: 1000 },
       { id: "angttvatt", label: "Ångtvätt", price: 500 },
     ],
   },

@@ -162,6 +162,7 @@ const SERVICES = {
       { id: "mogel", label: "Mögelsanering — 400 kr/tim", price: 0, isManual: true },
       { id: "kalk", label: "Svår kalk — 400 kr/tim", price: 0, isManual: true },
       { id: "fogar", label: "Djuprengöring fogar — 400 kr/tim", price: 0, isManual: true },
+      { id: "lordag", label: "Städas på lördag", price: 500 },
     ],
   },
   koksstadning: {
