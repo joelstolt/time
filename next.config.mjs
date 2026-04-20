@@ -38,6 +38,31 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/wp-json/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/category/:slug*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/tag/:slug*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/author/:slug*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/hemstad",
+        destination: "/hemstadning",
+        permanent: true,
+      },
     ];
   },
 };
