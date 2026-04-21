@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const TO_EMAIL = "info@timeoutservice.se";
-const FROM_EMAIL = "Timeout Service <info@timeoutservice.se>";
+const FROM_EMAIL = "Timeout Service <bokning@timeoutservice.se>";
 
 function escapeHtml(value) {
   return String(value ?? "")

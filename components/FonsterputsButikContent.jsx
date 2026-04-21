@@ -82,6 +82,34 @@ export default function FonsterputsButikContent() {
         </div>
       </section>
 
+      {/* Bildgalleri — senaste jobbet */}
+      <section className="section" style={{ paddingTop: 40 }}>
+        <div className="container">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: "center", marginBottom: 32 }}>
+            <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-primary)", marginBottom: 12, display: "block" }}>Referens</span>
+            <h2 style={{ fontSize: "clamp(26px, 4vw, 34px)", marginBottom: 12 }}>Senaste jobbet — Clas Ohlson flaggskeppsbutik</h2>
+            <p style={{ fontSize: 15, color: "var(--color-muted)", maxWidth: 560, margin: "0 auto", lineHeight: 1.6 }}>
+              Fönsterputs av en av Sveriges mest välbesökta butiker mitt i Stockholm. Vi använder lyftutrustning för höga glaspartier och arbetar efter butikens öppettider.
+            </p>
+          </motion.div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }} className="why-grid">
+            {[
+              { src: "/images/fonsterputs-4.jpg", alt: "Timeout Service fönsterputs med skylift på Clas Ohlson" },
+              { src: "/images/fonsterputs-5.jpg", alt: "Timeout Service rengör skyltfönster" },
+              { src: "/images/fonsterputs-7.jpg", alt: "Skylift utanför Clas Ohlson butik" },
+              { src: "/images/fonsterputs-8.jpg", alt: "Fönsterputs på entrépartier — Timeout Service" },
+            ].map((img, i) => (
+              <motion.div key={img.src} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 }}
+                style={{ borderRadius: 10, overflow: "hidden", aspectRatio: "4/5", background: "var(--color-bg-alt)" }}>
+                <img src={img.src} alt={img.alt} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s ease" }}
+                  onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.04)")}
+                  onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Varför oss */}
       <section className="section">
         <div className="container" style={{ maxWidth: 700 }}>
