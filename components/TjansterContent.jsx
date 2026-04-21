@@ -15,7 +15,7 @@ const services = [
     title: "Fönsterputs",
     desc: "Fönsterputs kan vara svårt att få till om man vill ha ett bra resultat. Ta en 'Timeout' medan vi putsar dina fönster — skinande rent garanterat.",
     href: "/fonsterputs",
-    image: "/images/fonsterputs-1.jpg",
+    image: "/images/tjanst-fonster.jpg",
   },
   {
     title: "Flyttstädning",

@@ -140,7 +140,7 @@ export default function FonsterputsContent() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
-              <img src="/images/fonsterputs-1.jpg" alt="Fönsterputs Stockholm — Timeout Service" style={{ width: "100%", borderRadius: 12, aspectRatio: "4/3", objectFit: "cover" }} />
+              <img src="/images/tjanst-fonster.jpg" alt="Fönsterputs Stockholm — Timeout Service" style={{ width: "100%", borderRadius: 12, aspectRatio: "4/3", objectFit: "cover" }} />
             </motion.div>
           </div>
         </div>
