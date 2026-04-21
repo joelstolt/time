@@ -15,13 +15,13 @@ const services = [
     title: "Fönsterputs företag",
     desc: "Professionell fönsterputs för kontor, butiker och fastigheter. Vi har utrustningen och erfarenheten för alla typer av fönster — även svåråtkomliga.",
     href: "/fonsterputs-foretag",
-    image: "/images/tjanst-fonster.jpg",
+    image: "/images/fonsterputs-3.jpg",
   },
   {
     title: "Fönsterputs butik",
     desc: "Rena skyltfönster gör skillnad. Vi ser till att era butiksfönster alltid är skinande rena och ger ett professionellt intryck åt era kunder.",
     href: "/fonsterputs-butik",
-    image: "/images/foretag-butik-hero.jpeg",
+    image: "/images/fonsterputs-2.jpg",
   },
   {
     title: "Butiksservice",
