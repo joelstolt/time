@@ -40,6 +40,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 /* Skip to content link */
@@ -224,6 +225,15 @@ input:focus, select:focus, textarea:focus {
   border-color: var(--color-primary) !important;
   box-shadow: 0 0 0 3px rgba(0, 114, 185, 0.1) !important;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ===== iOS date-input fix: förhindra overflow på mobil ===== */
+input[type="date"] {
+  -webkit-appearance: none;
+  appearance: none;
+  min-width: 0;
+  max-width: 100%;
+  display: block;
 }
 
 /* ===== SERVICE IMAGE CARD HOVER ===== */
