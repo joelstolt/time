@@ -10,7 +10,11 @@ import {
   Phone,
   Plus,
   Minus,
+  Paperclip,
+  X,
+  Loader2,
 } from "lucide-react";
+import { compressImage } from "./imageCompression";
 
 /* ══════════════════════════════════════════════════════════
    PRICING DATA — alla priser efter RUT-avdrag
@@ -245,6 +249,22 @@ export default function PriceCalculator() {
   const [selectedAddons, setSelectedAddons] = useState([]);
   const [formSent, setFormSent] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("idle"); // idle | sending | error
+  const [files, setFiles] = useState([]);
+  const [compressing, setCompressing] = useState(false);
+
+  const handleFiles = async (e) => {
+    const picked = Array.from(e.target.files || []);
+    e.target.value = "";
+    if (picked.length === 0) return;
+    setCompressing(true);
+    try {
+      const compressed = await Promise.all(picked.map(compressImage));
+      setFiles((prev) => [...prev, ...compressed].slice(0, 10));
+    } finally {
+      setCompressing(false);
+    }
+  };
+  const removeFile = (i) => setFiles((prev) => prev.filter((_, idx) => idx !== i));
 
   const service = serviceId ? SERVICES[serviceId] : null;
 
@@ -282,7 +302,7 @@ export default function PriceCalculator() {
     e.preventDefault();
     if (submitStatus === "sending") return;
 
-    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    const formEl = e.currentTarget;
     const selectedAddonLabels = selectedAddons
       .map((id) => service?.addons?.find((a) => a.id === id)?.label)
       .filter(Boolean);
@@ -294,22 +314,17 @@ export default function PriceCalculator() {
         ? `${formatPrice(result.total)} ${result.unit}`
         : null;
 
-    const payload = {
-      ...data,
-      tjanst: service?.label,
-      kvm: sqmNum || null,
-      frekvens: freqLabel,
-      tillval: selectedAddonLabels,
-      pris,
-    };
-
     setSubmitStatus("sending");
     try {
-      const res = await fetch("/api/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const data = new FormData(formEl);
+      if (service?.label) data.set("tjanst", service.label);
+      if (sqmNum) data.set("kvm", String(sqmNum));
+      if (freqLabel) data.set("frekvens", freqLabel);
+      selectedAddonLabels.forEach((label) => data.append("tillval", label));
+      if (pris) data.set("pris", pris);
+      files.forEach((f) => data.append("files", f));
+
+      const res = await fetch("/api/send", { method: "POST", body: data });
       if (!res.ok) throw new Error("Request failed");
       setFormSent(true);
       setSubmitStatus("idle");
@@ -612,6 +627,27 @@ export default function PriceCalculator() {
                           <input name="datum" type="text" placeholder="Önskat datum" onFocus={(e) => (e.target.type = "date")} style={{ width: "100%", padding: "14px 16px", fontSize: 15, border: "2px solid var(--color-border)", borderRadius: 10, outline: "none", fontFamily: "var(--font-body)" }} />
                         </div>
                         <textarea name="meddelande" rows={3} placeholder="Meddelande" style={{ width: "100%", padding: "14px 16px", fontSize: 15, border: "2px solid var(--color-border)", borderRadius: 10, outline: "none", fontFamily: "var(--font-body)", resize: "vertical" }} />
+
+                        {/* Bilduppladdning */}
+                        <div>
+                          <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: 12, border: "2px dashed var(--color-border)", borderRadius: 10, cursor: compressing ? "wait" : "pointer", background: "white", fontSize: 14, color: "var(--color-muted)", opacity: compressing ? 0.7 : 1 }}>
+                            {compressing ? <Loader2 size={16} className="spin" /> : <Paperclip size={16} />}
+                            <span>{compressing ? "Förbereder bilder..." : "Bifoga bilder (valfritt)"}</span>
+                            <input type="file" accept="image/*" multiple onChange={handleFiles} disabled={compressing} style={{ display: "none" }} />
+                          </label>
+                          {files.length > 0 && (
+                            <ul style={{ listStyle: "none", padding: 0, margin: "8px 0 0", display: "grid", gap: 4 }}>
+                              {files.map((f, i) => (
+                                <li key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "6px 10px", background: "var(--color-bg-alt)", borderRadius: 6, fontSize: 12 }}>
+                                  <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name} <span style={{ color: "var(--color-muted)" }}>({(f.size / 1024).toFixed(0)} kB)</span></span>
+                                  <button type="button" onClick={() => removeFile(i)} aria-label="Ta bort" style={{ background: "transparent", border: "none", cursor: "pointer", color: "var(--color-muted)", display: "flex", alignItems: "center", padding: 0 }}>
+                                    <X size={14} />
+                                  </button>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
 
                         {/* Honeypot mot bot-submissions */}
                         <input type="text" name="company" tabIndex={-1} autoComplete="off" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} aria-hidden="true" />

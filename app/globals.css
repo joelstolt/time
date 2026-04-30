@@ -404,6 +404,14 @@ input[type="date"] {
     grid-template-columns: 1fr !important;
   }
 
+  .hero-buttons {
+    flex-direction: column-reverse !important;
+  }
+  .hero-buttons > button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
   .hero-trust {
     gap: 16px !important;
   }

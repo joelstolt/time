@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Star, Shield, Award, Leaf, Check, ArrowLeft } from "lucide-react";
+import { ChevronDown, Star, Shield, Award, Leaf, Check, ArrowLeft, Paperclip, X, Loader2 } from "lucide-react";
 import { useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import { compressImage } from "./imageCompression";
 
 /* ══════════════════ PRICING DATA ══════════════════ */
 
@@ -200,6 +201,22 @@ export default function Hero() {
   const [selectedAddons, setSelectedAddons] = useState([]);
   const [formSent, setFormSent] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("idle"); // idle | sending | error
+  const [files, setFiles] = useState([]);
+  const [compressing, setCompressing] = useState(false);
+
+  const handleFiles = async (e) => {
+    const picked = Array.from(e.target.files || []);
+    e.target.value = "";
+    if (picked.length === 0) return;
+    setCompressing(true);
+    try {
+      const compressed = await Promise.all(picked.map(compressImage));
+      setFiles((prev) => [...prev, ...compressed].slice(0, 10));
+    } finally {
+      setCompressing(false);
+    }
+  };
+  const removeFile = (i) => setFiles((prev) => prev.filter((_, idx) => idx !== i));
 
   const service = serviceId ? SERVICES[serviceId] : null;
   const sqmNum = parseInt(sqm) || 0;
@@ -223,7 +240,7 @@ export default function Hero() {
     e.preventDefault();
     if (submitStatus === "sending") return;
 
-    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    const formEl = e.currentTarget;
     const selectedAddonLabels = selectedAddons
       .map((id) => service?.addons?.find((a) => a.id === id)?.label)
       .filter(Boolean);
@@ -233,22 +250,17 @@ export default function Hero() {
     const pris =
       result?.type === "price" ? `${fmt(result.total)} ${result.unit}` : null;
 
-    const payload = {
-      ...data,
-      tjanst: service?.label,
-      kvm: sqmNum || null,
-      frekvens: freqLabel,
-      tillval: selectedAddonLabels,
-      pris,
-    };
-
     setSubmitStatus("sending");
     try {
-      const res = await fetch("/api/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const data = new FormData(formEl);
+      if (service?.label) data.set("tjanst", service.label);
+      if (sqmNum) data.set("kvm", String(sqmNum));
+      if (freqLabel) data.set("frekvens", freqLabel);
+      selectedAddonLabels.forEach((label) => data.append("tillval", label));
+      if (pris) data.set("pris", pris);
+      files.forEach((f) => data.append("files", f));
+
+      const res = await fetch("/api/send", { method: "POST", body: data });
       if (!res.ok) throw new Error("Request failed");
       setFormSent(true);
       setSubmitStatus("idle");
@@ -406,8 +418,8 @@ export default function Hero() {
                 )}
 
                 {/* Navigation */}
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <button onClick={handleBack} style={{ padding: "12px 20px", background: "rgba(255,255,255,0.15)", border: "none", borderRadius: 8, color: "white", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, fontFamily: "var(--font-body)" }}>
+                <div className="hero-buttons" style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+                  <button onClick={handleBack} style={{ padding: "12px 20px", background: "rgba(255,255,255,0.15)", border: "none", borderRadius: 8, color: "white", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, fontFamily: "var(--font-body)" }}>
                     <ArrowLeft size={16} /> Tillbaka
                   </button>
                   {result?.type === "price" && (
@@ -448,7 +460,28 @@ export default function Hero() {
                       <input name="telefon" type="tel" required placeholder="Telefonnummer" style={inputStyle} />
                       <input name="datum" type="text" placeholder="Önskat datum" onFocus={(e) => (e.target.type = "date")} style={inputStyle} />
                     </div>
-                    <textarea name="meddelande" rows={3} placeholder="Meddelande" style={{ ...inputStyle, resize: "vertical", marginBottom: 16 }} />
+                    <textarea name="meddelande" rows={3} placeholder="Meddelande" style={{ ...inputStyle, resize: "vertical", marginBottom: 12 }} />
+
+                    {/* Bilduppladdning */}
+                    <div style={{ marginBottom: 16 }}>
+                      <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: 12, border: "2px dashed rgba(255,255,255,0.4)", borderRadius: 8, cursor: compressing ? "wait" : "pointer", background: "rgba(255,255,255,0.08)", fontSize: 14, color: "rgba(255,255,255,0.85)", opacity: compressing ? 0.7 : 1 }}>
+                        {compressing ? <Loader2 size={16} className="spin" /> : <Paperclip size={16} />}
+                        <span>{compressing ? "Förbereder bilder..." : "Bifoga bilder (valfritt)"}</span>
+                        <input type="file" accept="image/*" multiple onChange={handleFiles} disabled={compressing} style={{ display: "none" }} />
+                      </label>
+                      {files.length > 0 && (
+                        <ul style={{ listStyle: "none", padding: 0, margin: "8px 0 0", display: "grid", gap: 4 }}>
+                          {files.map((f, i) => (
+                            <li key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "6px 10px", background: "rgba(255,255,255,0.12)", borderRadius: 6, fontSize: 12, color: "rgba(255,255,255,0.9)" }}>
+                              <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name} <span style={{ opacity: 0.7 }}>({(f.size / 1024).toFixed(0)} kB)</span></span>
+                              <button type="button" onClick={() => removeFile(i)} aria-label="Ta bort" style={{ background: "transparent", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.8)", display: "flex", alignItems: "center", padding: 0 }}>
+                                <X size={14} />
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
 
                     {/* Honeypot mot bot-submissions */}
                     <input type="text" name="company" tabIndex={-1} autoComplete="off" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} aria-hidden="true" />
@@ -459,8 +492,8 @@ export default function Hero() {
                       </p>
                     )}
 
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <button type="button" onClick={handleBack} disabled={submitStatus === "sending"} style={{ padding: "12px 20px", background: "rgba(255,255,255,0.15)", border: "none", borderRadius: 8, color: "white", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, fontFamily: "var(--font-body)" }}>
+                    <div className="hero-buttons" style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+                      <button type="button" onClick={handleBack} disabled={submitStatus === "sending"} style={{ padding: "12px 20px", background: "rgba(255,255,255,0.15)", border: "none", borderRadius: 8, color: "white", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, fontFamily: "var(--font-body)" }}>
                         <ArrowLeft size={16} /> Gå tillbaka
                       </button>
                       <button type="submit" className="btn-accent" disabled={submitStatus === "sending"} style={{ padding: "12px 36px", opacity: submitStatus === "sending" ? 0.6 : 1 }}>
