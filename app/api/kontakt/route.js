@@ -1,14 +1,18 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+export const runtime = "nodejs";
+export const maxDuration = 30;
+
+let _resend;
+const getResend = () => (_resend ||= new Resend(process.env.RESEND_API_KEY));
 
 const TO_EMAIL = "info@timeoutservice.se";
 const FROM_EMAIL = "Timeout Service <bokning@timeoutservice.se>";
 
 const MAX_FILES = 10;
-const MAX_FILE_BYTES = 4 * 1024 * 1024; // 4 MB per fil
-const MAX_TOTAL_BYTES = 8 * 1024 * 1024; // 8 MB totalt
+const MAX_FILE_BYTES = 8 * 1024 * 1024; // 8 MB per fil (klienten komprimerar normalt till <1 MB)
+const MAX_TOTAL_BYTES = 20 * 1024 * 1024; // 20 MB totalt
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -98,7 +102,7 @@ export async function POST(req) {
       </div>
     `;
 
-    await resend.emails.send({
+    await getResend().emails.send({
       from: FROM_EMAIL,
       to: TO_EMAIL,
       replyTo: email,

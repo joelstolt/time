@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Phone, Mail, MapPin, Clock, ChevronRight, ChevronDown, Paperclip, X } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, ChevronRight, ChevronDown, Paperclip, X, Loader2 } from "lucide-react";
+import { compressImage } from "./imageCompression";
 
 const arenden = [
   "Boka städning",
@@ -26,9 +27,18 @@ export default function KontaktContent() {
   const [files, setFiles] = useState([]);
   const [form, setForm] = useState({ namn: "", email: "", telefon: "", arende: "", meddelande: "" });
   const [status, setStatus] = useState({ state: "idle", error: "" });
-  const handleFiles = (e) => {
+  const [compressing, setCompressing] = useState(false);
+  const handleFiles = async (e) => {
     const picked = Array.from(e.target.files || []);
-    setFiles((prev) => [...prev, ...picked].slice(0, 10));
+    e.target.value = "";
+    if (picked.length === 0) return;
+    setCompressing(true);
+    try {
+      const compressed = await Promise.all(picked.map(compressImage));
+      setFiles((prev) => [...prev, ...compressed].slice(0, 10));
+    } finally {
+      setCompressing(false);
+    }
   };
   const removeFile = (i) => setFiles((prev) => prev.filter((_, idx) => idx !== i));
   const update = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
@@ -47,7 +57,10 @@ export default function KontaktContent() {
       files.forEach((f) => data.append("files", f));
       const res = await fetch("/api/kontakt", { method: "POST", body: data });
       const json = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(json.error || "Något gick fel.");
+      if (!res.ok) {
+        if (res.status === 413) throw new Error("Bilderna är för stora. Försök med färre eller mindre bilder.");
+        throw new Error(json.error || "Något gick fel.");
+      }
       setStatus({ state: "success", error: "" });
       setForm({ namn: "", email: "", telefon: "", arende: "", meddelande: "" });
       setFiles([]);
@@ -111,14 +124,14 @@ export default function KontaktContent() {
 
                 <div>
                   <label style={{ display: "block", fontSize: 14, fontWeight: 600, color: "var(--color-heading)", marginBottom: 6 }}>Bifoga bilder (valfritt)</label>
-                  <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: 14, border: "2px dashed var(--color-border)", borderRadius: 10, cursor: "pointer", background: "white", fontSize: 14, color: "var(--color-muted)", transition: "border-color 0.2s" }}
+                  <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: 14, border: "2px dashed var(--color-border)", borderRadius: 10, cursor: compressing ? "wait" : "pointer", background: "white", fontSize: 14, color: "var(--color-muted)", transition: "border-color 0.2s", opacity: compressing ? 0.7 : 1 }}
                     onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--color-primary)")}
                     onMouseLeave={(e) => (e.currentTarget.style.borderColor = "var(--color-border)")}>
-                    <Paperclip size={16} />
-                    <span>Klicka för att välja bilder eller släpp filer här</span>
-                    <input type="file" accept="image/*" multiple onChange={handleFiles} style={{ display: "none" }} />
+                    {compressing ? <Loader2 size={16} className="spin" /> : <Paperclip size={16} />}
+                    <span>{compressing ? "Förbereder bilder..." : "Klicka för att välja bilder eller släpp filer här"}</span>
+                    <input type="file" accept="image/*" multiple onChange={handleFiles} disabled={compressing} style={{ display: "none" }} />
                   </label>
-                  <p style={{ fontSize: 12, color: "var(--color-muted)", marginTop: 6 }}>Max 10 bilder, 4 MB per bild. JPG, PNG eller HEIC.</p>
+                  <p style={{ fontSize: 12, color: "var(--color-muted)", marginTop: 6 }}>Max 10 bilder. Bilderna komprimeras automatiskt innan de skickas.</p>
                   {files.length > 0 && (
                     <ul style={{ listStyle: "none", padding: 0, margin: "12px 0 0", display: "grid", gap: 6 }}>
                       {files.map((f, i) => (

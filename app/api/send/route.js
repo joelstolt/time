@@ -1,10 +1,50 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+export const runtime = "nodejs";
+export const maxDuration = 30;
+
+let _resend;
+const getResend = () => (_resend ||= new Resend(process.env.RESEND_API_KEY));
 
 const TO_EMAIL = "info@timeoutservice.se";
 const FROM_EMAIL = "Timeout Service <bokning@timeoutservice.se>";
+
+const MAX_FILES = 10;
+const MAX_FILE_BYTES = 8 * 1024 * 1024;
+const MAX_TOTAL_BYTES = 20 * 1024 * 1024;
+
+async function parseRequestBody(req) {
+  const contentType = req.headers.get("content-type") || "";
+  if (contentType.includes("multipart/form-data")) {
+    const form = await req.formData();
+    const body = {};
+    const attachments = [];
+    let totalBytes = 0;
+    for (const [key, value] of form.entries()) {
+      if (key === "files") {
+        if (value && typeof value.arrayBuffer === "function" && value.size > 0) {
+          if (attachments.length >= MAX_FILES) continue;
+          if (value.size > MAX_FILE_BYTES) {
+            throw new Error(`Bilden "${value.name}" är större än 8 MB.`);
+          }
+          totalBytes += value.size;
+          if (totalBytes > MAX_TOTAL_BYTES) {
+            throw new Error("Totala filstorleken överstiger 20 MB.");
+          }
+          const buf = Buffer.from(await value.arrayBuffer());
+          attachments.push({ filename: value.name || "bifogad-bild", content: buf });
+        }
+      } else if (key === "tillval") {
+        body.tillval = body.tillval ? [].concat(body.tillval, value) : [value];
+      } else {
+        body[key] = value;
+      }
+    }
+    return { body, attachments };
+  }
+  return { body: await req.json(), attachments: [] };
+}
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -26,7 +66,7 @@ function row(label, value) {
 
 export async function POST(req) {
   try {
-    const body = await req.json();
+    const { body, attachments } = await parseRequestBody(req);
 
     // Honeypot — tyst 200 om en bot fyllt det dolda fältet
     if (body.company) {
@@ -91,16 +131,18 @@ export async function POST(req) {
           ${row("Beräknat pris", pris)}
           ${row("Önskat datum", datum)}
           ${row("Meddelande", meddelande)}
+          ${row("Bifogade bilder", attachments.length || "")}
         </table>
       </div>
     `;
 
-    await resend.emails.send({
+    await getResend().emails.send({
       from: FROM_EMAIL,
       to: TO_EMAIL,
       replyTo: email,
       subject,
       html,
+      attachments: attachments.length ? attachments : undefined,
     });
 
     return NextResponse.json({ success: true });

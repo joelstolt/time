@@ -3,7 +3,8 @@
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Clock, Check } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Check, Paperclip, X, Loader2 } from "lucide-react";
+import { compressImage } from "./imageCompression";
 
 const services = [
   "Hemstädning",
@@ -23,19 +24,33 @@ function BookingFormInner() {
   const preService = searchParams.get("tjanst") || "";
   const preSqm = searchParams.get("kvm") || "";
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [files, setFiles] = useState([]);
+  const [compressing, setCompressing] = useState(false);
+
+  const handleFiles = async (e) => {
+    const picked = Array.from(e.target.files || []);
+    e.target.value = "";
+    if (picked.length === 0) return;
+    setCompressing(true);
+    try {
+      const compressed = await Promise.all(picked.map(compressImage));
+      setFiles((prev) => [...prev, ...compressed].slice(0, 10));
+    } finally {
+      setCompressing(false);
+    }
+  };
+  const removeFile = (i) => setFiles((prev) => prev.filter((_, idx) => idx !== i));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (status === "sending") return;
 
-    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    const formEl = e.currentTarget;
     setStatus("sending");
     try {
-      const res = await fetch("/api/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const data = new FormData(formEl);
+      files.forEach((f) => data.append("files", f));
+      const res = await fetch("/api/send", { method: "POST", body: data });
       if (!res.ok) throw new Error("Request failed");
       setStatus("sent");
     } catch {
@@ -155,6 +170,30 @@ function BookingFormInner() {
                 <div>
                   <label style={labelStyle}>Meddelande</label>
                   <textarea name="meddelande" rows={4} style={{ ...inputStyle, resize: "vertical" }} placeholder="Berätta mer om vad du behöver hjälp med..." onFocus={(e) => (e.target.style.borderColor = "var(--color-primary)")} onBlur={(e) => (e.target.style.borderColor = "var(--color-border)")} />
+                </div>
+
+                <div>
+                  <label style={labelStyle}>Bifoga bilder (valfritt)</label>
+                  <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: 14, border: "2px dashed var(--color-border)", borderRadius: 10, cursor: compressing ? "wait" : "pointer", background: "white", fontSize: 14, color: "var(--color-muted)", transition: "border-color 0.2s", opacity: compressing ? 0.7 : 1 }}
+                    onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--color-primary)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.borderColor = "var(--color-border)")}>
+                    {compressing ? <Loader2 size={16} className="spin" /> : <Paperclip size={16} />}
+                    <span>{compressing ? "Förbereder bilder..." : "Klicka för att välja bilder eller släpp filer här"}</span>
+                    <input type="file" accept="image/*" multiple onChange={handleFiles} disabled={compressing} style={{ display: "none" }} />
+                  </label>
+                  <p style={{ fontSize: 12, color: "var(--color-muted)", marginTop: 6 }}>Max 10 bilder. Bilderna komprimeras automatiskt innan de skickas.</p>
+                  {files.length > 0 && (
+                    <ul style={{ listStyle: "none", padding: 0, margin: "12px 0 0", display: "grid", gap: 6 }}>
+                      {files.map((f, i) => (
+                        <li key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "8px 12px", background: "var(--color-bg-alt)", borderRadius: 8, fontSize: 13 }}>
+                          <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name} <span style={{ color: "var(--color-muted)" }}>({(f.size / 1024).toFixed(0)} kB)</span></span>
+                          <button type="button" onClick={() => removeFile(i)} aria-label="Ta bort" style={{ background: "transparent", border: "none", cursor: "pointer", color: "var(--color-muted)", display: "flex", alignItems: "center" }}>
+                            <X size={16} />
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
 
                 {/* Honeypot mot bot-submissions */}
