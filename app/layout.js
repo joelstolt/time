@@ -1,4 +1,5 @@
 import { DM_Serif_Display, DM_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const heading = DM_Serif_Display({
@@ -134,6 +135,12 @@ export default function RootLayout({ children }) {
           Hoppa till innehåll
         </a>
         <main id="main-content">{children}</main>
+        {/* Umami analytics (self-hosted, GDPR-compliant, no cookies) */}
+        <Script
+          src="https://umami-analytics-tau-two.vercel.app/script.js"
+          data-website-id="3207169c-cafd-4748-8060-cc97c7b47220"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
