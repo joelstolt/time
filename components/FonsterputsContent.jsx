@@ -27,9 +27,9 @@ const lagenhetPriser = [
 ];
 
 const villaPriser = [
-  { typ: "Standard 2-luft", pris: "50 kr/fönster" },
-  { typ: "Standard 4-luft", pris: "60 kr/fönster" },
-  { typ: "Standard 6-luft", pris: "70 kr/fönster" },
+  { typ: "Standard 2 sidor", pris: "50 kr/fönster" },
+  { typ: "Standard 4 sidor", pris: "60 kr/fönster" },
+  { typ: "Standard 6 sidor", pris: "70 kr/fönster" },
   { typ: "Inglasad balkong/veranda", pris: "från 400 kr" },
   { typ: "Inglasad uteplats (max 10 glaspartier)", pris: "från 500 kr" },
 ];
@@ -44,7 +44,6 @@ const tillagg = [
   { namn: "Över-/underlapp", pris: "+30 kr" },
   { namn: "Silikon-/färgborttagning", pris: "+30 kr" },
   { namn: "Spröjs", pris: "+30 kr/fönster" },
-  { namn: "Karmtvätt in-/utsida", pris: "+20 kr/fönster" },
 ];
 
 const features = [
