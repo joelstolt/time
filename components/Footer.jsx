@@ -43,10 +43,12 @@ export default function Footer() {
               Privatperson
             </h3>
             <a href="/hemstadning" className="footer-link">Hemstädning</a>
-            <a href="/flyttstadning" className="footer-link">Flyttstädning</a>
-            <a href="/storstadning" className="footer-link">Storstädning</a>
             <a href="/fonsterputs" className="footer-link">Fönsterputs</a>
+            <a href="/storstadning" className="footer-link">Storstädning</a>
+            <a href="/flyttstadning" className="footer-link">Flyttstädning</a>
             <a href="/visningsstadning" className="footer-link">Visningsstädning</a>
+            <a href="/koksstadning" className="footer-link">Köksstädning</a>
+            <a href="/badrumsstadning" className="footer-link">Badrumsstädning</a>
             <a href="/mattvatt" className="footer-link">Mattvätt</a>
           </div>
 
@@ -59,6 +61,8 @@ export default function Footer() {
             <a href="/fonsterputs-foretag" className="footer-link">Fönsterputs företag</a>
             <a href="/fonsterputs-butik" className="footer-link">Fönsterputs butik</a>
             <a href="/butiksservice" className="footer-link">Butiksservice</a>
+            <a href="/storstadning-foretag" className="footer-link">Storstädning</a>
+            <a href="/flyttstadning-foretag" className="footer-link">Flyttstädning</a>
             <a href="/golvvard" className="footer-link">Golvvård</a>
             <a href="/trappstadning" className="footer-link">Trappstädning</a>
           </div>

@@ -413,7 +413,10 @@ export default function Hero() {
 
                 {result?.type === "contact" && (
                   <div style={{ background: "rgba(222,160,30,0.2)", borderRadius: 10, padding: "16px 20px", marginBottom: 16, textAlign: "center" }}>
-                    <span style={{ color: "white", fontSize: 15, fontWeight: 600 }}>Kontakta oss för offert!</span>
+                    <div style={{ color: "white", fontSize: 15, fontWeight: 600, marginBottom: 6 }}>Den här ytan ligger utanför våra standardpriser</div>
+                    <div style={{ color: "rgba(255,255,255,0.85)", fontSize: 14 }}>
+                      Skicka en förfrågan så återkommer vi, eller ring <a href="tel:08-377176" style={{ color: "var(--color-accent)", fontWeight: 700, textDecoration: "underline" }}>08-37 71 76</a>
+                    </div>
                   </div>
                 )}
 
@@ -422,9 +425,9 @@ export default function Hero() {
                   <button onClick={handleBack} style={{ padding: "12px 20px", background: "rgba(255,255,255,0.15)", border: "none", borderRadius: 8, color: "white", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, fontFamily: "var(--font-body)" }}>
                     <ArrowLeft size={16} /> Tillbaka
                   </button>
-                  {result?.type === "price" && (
+                  {(result?.type === "price" || result?.type === "contact") && (
                     <button className="btn-accent" style={{ padding: "12px 28px" }} onClick={() => setStep(2)}>
-                      Boka
+                      {result.type === "price" ? "Boka" : "Skicka förfrågan"}
                     </button>
                   )}
                 </div>
@@ -449,16 +452,17 @@ export default function Hero() {
                       <input name="efternamn" required placeholder="Efternamn" style={inputStyle} />
                     </div>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }} className="hero-form-grid">
-                      <input name="adress" placeholder="Adress" style={inputStyle} />
-                      <input name="postnummer" placeholder="Postnummer" style={inputStyle} />
-                    </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }} className="hero-form-grid">
-                      <input name="ort" placeholder="Ort" style={inputStyle} />
-                      <input name="email" type="email" required placeholder="Email" style={inputStyle} />
-                    </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }} className="hero-form-grid">
+                      <input name="email" type="email" required placeholder="E-post" style={inputStyle} />
                       <input name="telefon" type="tel" required placeholder="Telefonnummer" style={inputStyle} />
-                      <input name="datum" type="text" placeholder="Önskat datum" onFocus={(e) => (e.target.type = "date")} style={inputStyle} />
+                    </div>
+                    <input name="adress" placeholder="Adress" style={{ ...inputStyle, marginBottom: 12 }} />
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 12, marginBottom: 12 }} className="hero-form-grid">
+                      <input name="postnummer" placeholder="Postnummer" style={inputStyle} />
+                      <input name="ort" placeholder="Ort" style={inputStyle} />
+                    </div>
+                    <div style={{ marginBottom: 12 }}>
+                      <label htmlFor="hero-datum" style={labelStyle}>Önskat datum</label>
+                      <input id="hero-datum" name="datum" type="date" style={inputStyle} />
                     </div>
                     <textarea name="meddelande" rows={3} placeholder="Meddelande" style={{ ...inputStyle, resize: "vertical", marginBottom: 12 }} />
 
