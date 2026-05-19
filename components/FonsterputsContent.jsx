@@ -36,12 +36,11 @@ const villaPriser = [
 
 const tillagg = [
   { namn: "Helgtillägg", pris: "500 kr" },
-  { namn: "Stor stege", pris: "100 kr" },
   { namn: "Stegearbete över 6 meter", pris: "250 kr" },
   { namn: "Persienntvätt", pris: "75 kr eller 40 kr/st" },
   { namn: "Fönsterbåge/list tvätt", pris: "40 kr/st" },
   { namn: "Utåtgående fönster", pris: "+20 kr" },
-  { namn: "Över-/underlapp", pris: "+30 kr" },
+  { namn: "Under-/överfönster", pris: "+30 kr" },
   { namn: "Silikon-/färgborttagning", pris: "+30 kr" },
   { namn: "Spröjs", pris: "+30 kr/fönster" },
 ];
