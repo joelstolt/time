@@ -53,6 +53,7 @@ function BookingFormInner() {
       const res = await fetch("/api/send", { method: "POST", body: data });
       if (!res.ok) throw new Error("Request failed");
       setStatus("sent");
+      if (typeof window !== "undefined" && window.umami) { window.umami.track("lead-bokning"); }
     } catch {
       setStatus("error");
     }
