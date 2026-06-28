@@ -36,7 +36,7 @@ export async function POST(req) {
   try {
     const form = await req.formData();
 
-    if (form.get("company")) {
+    if (form.get("hp_field")) {
       return NextResponse.json({ success: true });
     }
 

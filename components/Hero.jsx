@@ -488,7 +488,7 @@ export default function Hero() {
                     </div>
 
                     {/* Honeypot mot bot-submissions */}
-                    <input type="text" name="company" tabIndex={-1} autoComplete="off" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} aria-hidden="true" />
+                    <input type="text" name="hp_field" tabIndex={-1} autoComplete="off" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} aria-hidden="true" />
 
                     {submitStatus === "error" && (
                       <p style={{ color: "#ffdddd", fontSize: 13, marginBottom: 12, textAlign: "center" }}>

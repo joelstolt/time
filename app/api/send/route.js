@@ -69,7 +69,7 @@ export async function POST(req) {
     const { body, attachments } = await parseRequestBody(req);
 
     // Honeypot — tyst 200 om en bot fyllt det dolda fältet
-    if (body.company) {
+    if (body.hp_field) {
       return NextResponse.json({ success: true });
     }
 
