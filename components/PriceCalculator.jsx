@@ -328,6 +328,7 @@ export default function PriceCalculator() {
       if (!res.ok) throw new Error("Request failed");
       setFormSent(true);
       setSubmitStatus("idle");
+      if (typeof window !== "undefined" && window.umami) { window.umami.track("lead-priskalkylator"); }
     } catch {
       setSubmitStatus("error");
     }

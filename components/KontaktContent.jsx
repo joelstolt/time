@@ -64,6 +64,7 @@ export default function KontaktContent() {
       setStatus({ state: "success", error: "" });
       setForm({ namn: "", email: "", telefon: "", arende: "", meddelande: "" });
       setFiles([]);
+      if (typeof window !== "undefined" && window.umami) { window.umami.track("lead-kontakt"); }
     } catch (err) {
       setStatus({ state: "error", error: err.message });
     }
