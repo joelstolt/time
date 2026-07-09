@@ -352,12 +352,19 @@ input[type="date"] {
   display: inline-flex !important;
 }
 
+#header-login {
+  display: inline-flex !important;
+}
+
 #header-hamburger {
   display: none !important;
 }
 
 @media (max-width: 1024px) {
   #header-cta {
+    display: none !important;
+  }
+  #header-login {
     display: none !important;
   }
   #header-hamburger {

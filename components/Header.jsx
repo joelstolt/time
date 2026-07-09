@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Menu, X, Phone, Mail, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, Mail, ChevronDown, LogIn } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 
 const navLinks = [
@@ -199,6 +199,17 @@ export default function Header() {
 
           {/* CTA + Mobile toggle */}
           <div style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
+            <a
+              href="https://timeoutservice.twportal.se/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+              id="header-login"
+              style={{ padding: "6px 16px", fontSize: 13, gap: 6 }}
+              onClick={() => { if (typeof window !== "undefined" && window.umami) { window.umami.track("login-portal"); } }}
+            >
+              <LogIn size={14} /> Logga in
+            </a>
             <a href="/boka" className="btn-primary" style={{ padding: "8px 18px", fontSize: 13 }} id="header-cta">
               Boka städning
             </a>
@@ -292,6 +303,16 @@ export default function Header() {
 
             {/* Mobile CTA */}
             <div style={{ padding: "16px 20px", borderTop: "1px solid var(--color-border-light)", display: "flex", flexDirection: "column", gap: 10 }}>
+              <a
+                href="https://timeoutservice.twportal.se/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
+                style={{ justifyContent: "center", width: "100%" }}
+                onClick={() => { if (typeof window !== "undefined" && window.umami) { window.umami.track("login-portal"); } }}
+              >
+                <LogIn size={16} /> Logga in
+              </a>
               <a href="tel:08-377176" className="btn-secondary" style={{ justifyContent: "center", width: "100%" }}>
                 <Phone size={16} /> Ring 08-37 71 76
               </a>
