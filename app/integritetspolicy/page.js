@@ -60,6 +60,12 @@ export default function Integritetspolicy() {
             <p>Om du har frågor om vår hantering av personuppgifter, kontakta oss på info@timeoutservice.se eller ring 08-37 71 76.</p>
 
             <p style={{ marginTop: 32, fontSize: 14, color: "var(--color-muted)" }}>Senast uppdaterad: mars 2026</p>
+            <p style={{ marginTop: 24, fontSize: 12, color: "var(--color-muted)" }}>
+              Design:{" "}
+              <a href="https://www.welovemarketing.se" style={{ textDecoration: "underline", color: "inherit" }}>We Love Marketing</a>{" "}
+              · SEO:{" "}
+              <a href="https://www.stoltmarketing.se" style={{ textDecoration: "underline", color: "inherit" }}>Stolt Marketing</a>
+            </p>
           </div>
         </div>
       </section>
