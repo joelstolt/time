@@ -7,8 +7,11 @@ export const maxDuration = 30;
 let _resend;
 const getResend = () => (_resend ||= new Resend(process.env.RESEND_API_KEY));
 
-const TO_EMAIL = "info@timeoutservice.se";
-const FROM_EMAIL = "Timeout Service <bokning@timeoutservice.se>";
+// Mottagare/avsändare kan överskridas via env vid testinlämningar.
+// CONTACT_TO får BARA sättas i Vercels Preview-miljö. Sätts den i Production
+// hamnar kundens leads tyst på fel adress utan att något syns i gränssnittet.
+const TO_EMAIL = process.env.CONTACT_TO || "info@timeoutservice.se";
+const FROM_EMAIL = process.env.CONTACT_FROM || "Timeout Service <bokning@timeoutservice.se>";
 
 const MAX_FILES = 10;
 const MAX_FILE_BYTES = 8 * 1024 * 1024; // 8 MB per fil (klienten komprimerar normalt till <1 MB)
