@@ -5,6 +5,6 @@ export default function robots() {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: "https://timeoutservice.se/sitemap.xml",
+    sitemap: "https://www.timeoutservice.se/sitemap.xml",
   };
 }

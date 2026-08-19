@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import KoksstadningContent from "@/components/KoksstadningContent";
 
 export const metadata = {
-  title: "Köksstädning Stockholm | Från 1 150 kr efter RUT | Timeout Service",
+  title: "Köksstädning Stockholm | Från 1 150 kr efter RUT",
+  alternates: { canonical: "/koksstadning" },
   description:
     "Professionell köksstädning i Stockholm. Djuprengöring av spis, fläkt, ugn och alla ytor. Från 1 150 kr efter RUT-avdrag. 35 års erfarenhet. Boka idag!",
   openGraph: {
@@ -16,15 +17,15 @@ export default function Koksstadning() {
   const breadcrumbSchema = {
     "@context": "https://schema.org", "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Hem", item: "https://timeoutservice.se" },
-      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://timeoutservice.se/tjanster" },
-      { "@type": "ListItem", position: 3, name: "Köksstädning", item: "https://timeoutservice.se/koksstadning" },
+      { "@type": "ListItem", position: 1, name: "Hem", item: "https://www.timeoutservice.se" },
+      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://www.timeoutservice.se/tjanster" },
+      { "@type": "ListItem", position: 3, name: "Köksstädning", item: "https://www.timeoutservice.se/koksstadning" },
     ],
   };
   const serviceSchema = {
     "@context": "https://schema.org", "@type": "Service",
     name: "Köksstädning Stockholm", description: "Professionell köksstädning och djuprengöring i Stockholm.",
-    provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://timeoutservice.se" },
+    provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://www.timeoutservice.se" },
     areaServed: { "@type": "City", name: "Stockholm" }, serviceType: "Köksstädning",
     offers: { "@type": "Offer", priceCurrency: "SEK", price: "1150", description: "Pris efter RUT-avdrag, 1-10 kvm" },
   };

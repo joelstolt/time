@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import FlyttstadningContent from "@/components/FlyttstadningContent";
 
 export const metadata = {
-  title: "Flyttstädning Stockholm | Från 2 400 kr efter RUT | Timeout Service",
+  title: "Flyttstädning Stockholm | Från 2 400 kr efter RUT",
+  alternates: { canonical: "/flyttstadning" },
   description:
     "Professionell flyttstädning i Stockholm. Fönsterputs ingår, 10 dagars garanti, allt material ingår. Samarbete med Notar & SKB. 35 års erfarenhet. Boka idag!",
   openGraph: {
@@ -16,16 +17,16 @@ export default function Flyttstadning() {
   const breadcrumbSchema = {
     "@context": "https://schema.org", "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Hem", item: "https://timeoutservice.se" },
-      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://timeoutservice.se/tjanster" },
-      { "@type": "ListItem", position: 3, name: "Flyttstädning", item: "https://timeoutservice.se/flyttstadning" },
+      { "@type": "ListItem", position: 1, name: "Hem", item: "https://www.timeoutservice.se" },
+      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://www.timeoutservice.se/tjanster" },
+      { "@type": "ListItem", position: 3, name: "Flyttstädning", item: "https://www.timeoutservice.se/flyttstadning" },
     ],
   };
   const serviceSchema = {
     "@context": "https://schema.org", "@type": "Service",
     name: "Flyttstädning Stockholm",
     description: "Professionell flyttstädning i Stockholm. Fönsterputs ingår, 10 dagars garanti, allt material ingår.",
-    provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://timeoutservice.se" },
+    provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://www.timeoutservice.se" },
     areaServed: { "@type": "City", name: "Stockholm" }, serviceType: "Flyttstädning",
   };
   const faqSchema = {

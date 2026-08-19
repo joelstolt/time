@@ -17,9 +17,9 @@ const body = DM_Sans({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://timeoutservice.se"),
+  metadataBase: new URL("https://www.timeoutservice.se"),
   title: {
-    default: "Timeout Service | Städfirma i Stockholm",
+    default: "Städfirma Stockholm | 35 års erfarenhet | Timeout Service",
     template: "%s | Timeout Service",
   },
   description:
@@ -34,13 +34,10 @@ export const metadata = {
     "professionell städning",
     "RUT-avdrag städning",
   ],
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     locale: "sv_SE",
-    url: "https://timeoutservice.se",
+    url: "https://www.timeoutservice.se",
     siteName: "Timeout Service",
     title: "Timeout Service | Professionell Städfirma i Stockholm",
     description:
@@ -50,7 +47,7 @@ export const metadata = {
         url: "/images/staff-kitchen.jpg",
         width: 1512,
         height: 2016,
-        alt: "Timeout Service AB — Professionell städning i Stockholm",
+        alt: "Timeout Service AB - Professionell städning i Stockholm",
       },
     ],
   },
@@ -74,11 +71,11 @@ export default function RootLayout({ children }) {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://timeoutservice.se",
+    "@id": "https://www.timeoutservice.se",
     name: "Timeout Service AB",
     description:
       "Professionell städfirma i Stockholm med 35 års erfarenhet. Hemstädning, flyttstädning, fönsterputs och företagsstädning.",
-    url: "https://timeoutservice.se",
+    url: "https://www.timeoutservice.se",
     telephone: "08-37 71 76",
     email: "info@timeoutservice.se",
     address: {
@@ -117,7 +114,7 @@ export default function RootLayout({ children }) {
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "5",
-      reviewCount: "4",
+      reviewCount: "35",
     },
   };
 

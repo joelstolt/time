@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import HemstadningContent from "@/components/HemstadningContent";
 
 export const metadata = {
-  title: "Hemstädning Stockholm | Nöjd-kund-garanti | Timeout Service",
+  title: "Hemstädning Stockholm | Nöjd-kund-garanti",
+  alternates: { canonical: "/hemstadning" },
   description:
     "Boka hemstädning i Stockholm. Samma städare varje gång, nöjd-kund-garanti, inga bindningstider. RUT-avdrag. 35 års erfarenhet. Kostnadsfritt hembesök. Ring 08-37 71 76.",
   openGraph: {
@@ -24,19 +25,19 @@ export default function Hemstadning() {
         "@type": "ListItem",
         position: 1,
         name: "Hem",
-        item: "https://timeoutservice.se",
+        item: "https://www.timeoutservice.se",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Privatperson",
-        item: "https://timeoutservice.se/tjanster",
+        item: "https://www.timeoutservice.se/tjanster",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: "Hemstädning",
-        item: "https://timeoutservice.se/hemstadning",
+        item: "https://www.timeoutservice.se/hemstadning",
       },
     ],
   };
@@ -50,7 +51,7 @@ export default function Hemstadning() {
     provider: {
       "@type": "LocalBusiness",
       name: "Timeout Service AB",
-      "@id": "https://timeoutservice.se",
+      "@id": "https://www.timeoutservice.se",
     },
     areaServed: {
       "@type": "City",

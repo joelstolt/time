@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import KontorstadningContent from "@/components/KontorstadningContent";
 
 export const metadata = {
-  title: "Kontorstädning Stockholm | Från 300 kr/h | Timeout Service",
+  title: "Kontorstädning Stockholm | Från 300 kr/h",
+  alternates: { canonical: "/kontorstadning" },
   description:
     "Professionell kontorstädning i Stockholm. Samma städare, ingen bindningstid, nöjd-kund-garanti. Dag, kväll och helg. Från 300 kr/h exkl. moms. Kostnadsfritt möte.",
   openGraph: { title: "Kontorstädning Stockholm | Timeout Service", description: "Kontorstädning i Stockholm. Flexibla tider, fast pris, ingen bindningstid." },
@@ -12,13 +13,13 @@ export const metadata = {
 export default function Kontorstadning() {
   const schemas = [
     { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Hem", item: "https://timeoutservice.se" },
-      { "@type": "ListItem", position: 2, name: "Företag", item: "https://timeoutservice.se/foretag" },
-      { "@type": "ListItem", position: 3, name: "Kontorstädning", item: "https://timeoutservice.se/kontorstadning" },
+      { "@type": "ListItem", position: 1, name: "Hem", item: "https://www.timeoutservice.se" },
+      { "@type": "ListItem", position: 2, name: "Företag", item: "https://www.timeoutservice.se/foretag" },
+      { "@type": "ListItem", position: 3, name: "Kontorstädning", item: "https://www.timeoutservice.se/kontorstadning" },
     ]},
     { "@context": "https://schema.org", "@type": "Service", name: "Kontorstädning Stockholm",
       description: "Professionell kontorstädning i Stockholm med fast pris och nöjd-kund-garanti.",
-      provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://timeoutservice.se" },
+      provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://www.timeoutservice.se" },
       areaServed: { "@type": "City", name: "Stockholm" }, serviceType: "Kontorstädning",
       offers: { "@type": "Offer", priceCurrency: "SEK", price: "300", description: "Från-pris per timme exkl. moms" } },
     { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [

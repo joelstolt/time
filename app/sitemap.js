@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = "https://timeoutservice.se";
+  const baseUrl = "https://www.timeoutservice.se";
 
   const pages = [
     { url: "/", changeFrequency: "weekly", priority: 1.0 },

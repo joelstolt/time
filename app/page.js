@@ -1,5 +1,10 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
 import TrustBar from "@/components/TrustBar";
 import Services from "@/components/Services";
 import BusinessServices from "@/components/BusinessServices";

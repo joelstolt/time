@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import MattvattContent from "@/components/MattvattContent";
 
 export const metadata = {
-  title: "Mattvätt Stockholm | Professionell mattvätt hemma hos dig | Timeout Service",
+  title: "Mattvätt Stockholm | Professionell mattvätt hemma hos dig",
+  alternates: { canonical: "/mattvatt" },
   description:
     "Professionell mattvätt i Stockholm — på plats hemma hos dig. Svanenmärkta produkter, RUT-avdrag. Förlänger mattans livslängd. Kontakta oss för offert!",
   openGraph: {
@@ -16,15 +17,15 @@ export default function Mattvatt() {
   const breadcrumbSchema = {
     "@context": "https://schema.org", "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Hem", item: "https://timeoutservice.se" },
-      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://timeoutservice.se/tjanster" },
-      { "@type": "ListItem", position: 3, name: "Mattvätt", item: "https://timeoutservice.se/mattvatt" },
+      { "@type": "ListItem", position: 1, name: "Hem", item: "https://www.timeoutservice.se" },
+      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://www.timeoutservice.se/tjanster" },
+      { "@type": "ListItem", position: 3, name: "Mattvätt", item: "https://www.timeoutservice.se/mattvatt" },
     ],
   };
   const serviceSchema = {
     "@context": "https://schema.org", "@type": "Service",
     name: "Mattvätt Stockholm", description: "Professionell mattvätt på plats i hela Storstockholm.",
-    provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://timeoutservice.se" },
+    provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://www.timeoutservice.se" },
     areaServed: { "@type": "City", name: "Stockholm" }, serviceType: "Mattvätt",
   };
   const faqSchema = {

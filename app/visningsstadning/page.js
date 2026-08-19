@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import VisningsstadningContent from "@/components/VisningsstadningContent";
 
 export const metadata = {
-  title: "Visningsstädning Stockholm | Från 2 500 kr efter RUT | Timeout Service",
+  title: "Visningsstädning Stockholm | Från 2 500 kr efter RUT",
+  alternates: { canonical: "/visningsstadning" },
   description:
     "Professionell visningsstädning i Stockholm. Samarbete med Notar & SKB. Ge köparna bästa möjliga intryck. 35 års erfarenhet. 10% rabatt vid kombination med flyttstäd.",
   openGraph: {
@@ -16,16 +17,16 @@ export default function Visningsstadning() {
   const breadcrumbSchema = {
     "@context": "https://schema.org", "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Hem", item: "https://timeoutservice.se" },
-      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://timeoutservice.se/tjanster" },
-      { "@type": "ListItem", position: 3, name: "Visningsstädning", item: "https://timeoutservice.se/visningsstadning" },
+      { "@type": "ListItem", position: 1, name: "Hem", item: "https://www.timeoutservice.se" },
+      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://www.timeoutservice.se/tjanster" },
+      { "@type": "ListItem", position: 3, name: "Visningsstädning", item: "https://www.timeoutservice.se/visningsstadning" },
     ],
   };
   const serviceSchema = {
     "@context": "https://schema.org", "@type": "Service",
     name: "Visningsstädning Stockholm",
     description: "Professionell visningsstädning i Stockholm. Samarbete med Notar & SKB sedan 2016.",
-    provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://timeoutservice.se" },
+    provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://www.timeoutservice.se" },
     areaServed: { "@type": "City", name: "Stockholm" }, serviceType: "Visningsstädning",
   };
   const faqSchema = {

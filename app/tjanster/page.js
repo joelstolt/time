@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import TjansterContent from "@/components/TjansterContent";
 
 export const metadata = {
-  title: "Städtjänster för privatpersoner i Stockholm | Timeout Service",
+  title: "Städtjänster för privatpersoner i Stockholm",
+  alternates: { canonical: "/tjanster" },
   description:
     "Alla städtjänster för privatpersoner i Stockholm. Hemstädning, flyttstädning, fönsterputs, storstädning, visningsstädning och mer. RUT-avdrag. Boka idag!",
   openGraph: {
@@ -18,8 +19,8 @@ export default function Tjanster() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Hem", item: "https://timeoutservice.se" },
-      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://timeoutservice.se/tjanster" },
+      { "@type": "ListItem", position: 1, name: "Hem", item: "https://www.timeoutservice.se" },
+      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://www.timeoutservice.se/tjanster" },
     ],
   };
 

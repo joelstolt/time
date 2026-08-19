@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import StorstadningContent from "@/components/StorstadningContent";
 
 export const metadata = {
-  title: "Storstädning Stockholm | Från 2 500 kr efter RUT | Timeout Service",
+  title: "Storstädning Stockholm | Från 2 500 kr efter RUT",
+  alternates: { canonical: "/storstadning" },
   description:
     "Professionell storstädning i Stockholm. Allt material ingår, 5 dagars garanti, RUT-avdrag. Vi tar hand om allt från golv till tak. Boka idag!",
   openGraph: {
@@ -17,9 +18,9 @@ export default function Storstadning() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Hem", item: "https://timeoutservice.se" },
-      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://timeoutservice.se/tjanster" },
-      { "@type": "ListItem", position: 3, name: "Storstädning", item: "https://timeoutservice.se/storstadning" },
+      { "@type": "ListItem", position: 1, name: "Hem", item: "https://www.timeoutservice.se" },
+      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://www.timeoutservice.se/tjanster" },
+      { "@type": "ListItem", position: 3, name: "Storstädning", item: "https://www.timeoutservice.se/storstadning" },
     ],
   };
 
@@ -27,7 +28,7 @@ export default function Storstadning() {
     "@context": "https://schema.org", "@type": "Service",
     name: "Storstädning Stockholm",
     description: "Professionell storstädning i Stockholm. Allt material ingår, 5 dagars kvalitetsgaranti.",
-    provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://timeoutservice.se" },
+    provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://www.timeoutservice.se" },
     areaServed: { "@type": "City", name: "Stockholm" },
     serviceType: "Storstädning",
   };

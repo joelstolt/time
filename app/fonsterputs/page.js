@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import FonsterputsContent from "@/components/FonsterputsContent";
 
 export const metadata = {
-  title: "Fönsterputs Stockholm | Fast pris från 450 kr efter RUT | Timeout Service",
+  title: "Fönsterputs Stockholm | Fast pris från 450 kr efter RUT",
+  alternates: { canonical: "/fonsterputs" },
   description:
     "Professionell fönsterputs i Stockholm. Fast pris, RUT-avdrag, 3 dagars garanti. Vi putsar fönster ner till -16°C. Över 550 kunder per år. Boka idag!",
   openGraph: {
@@ -18,9 +19,9 @@ export default function Fonsterputs() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Hem", item: "https://timeoutservice.se" },
-      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://timeoutservice.se/tjanster" },
-      { "@type": "ListItem", position: 3, name: "Fönsterputs", item: "https://timeoutservice.se/fonsterputs" },
+      { "@type": "ListItem", position: 1, name: "Hem", item: "https://www.timeoutservice.se" },
+      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://www.timeoutservice.se/tjanster" },
+      { "@type": "ListItem", position: 3, name: "Fönsterputs", item: "https://www.timeoutservice.se/fonsterputs" },
     ],
   };
 
@@ -29,7 +30,7 @@ export default function Fonsterputs() {
     "@type": "Service",
     name: "Fönsterputs Stockholm",
     description: "Professionell fönsterputs i Stockholm med fast pris och RUT-avdrag. 3 dagars garanti.",
-    provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://timeoutservice.se" },
+    provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://www.timeoutservice.se" },
     areaServed: { "@type": "City", name: "Stockholm" },
     serviceType: "Fönsterputs",
   };

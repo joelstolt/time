@@ -3,12 +3,13 @@ import Footer from "@/components/Footer";
 import BadrumsstadningContent from "@/components/BadrumsstadningContent";
 
 export const metadata = {
-  title: "Badrumsstädning Stockholm | Från 1 200 kr efter RUT | Timeout Service",
+  title: "Badrumsstädning Stockholm | Från 1 200 kr efter RUT",
+  alternates: { canonical: "/badrumsstadning" },
   description:
     "Professionell badrumsstädning i Stockholm. Djuprengöring av kakel, fogar, kalk och mögel. Ångmaskin tillgänglig. Från 1 200 kr efter RUT. Boka idag!",
   openGraph: {
     title: "Badrumsstädning Stockholm | Timeout Service",
-    description: "Badrumsstädning i Stockholm. Kalk, mögel och fogar — vi får ditt badrum att glänsa.",
+    description: "Badrumsstädning i Stockholm. Kalk, mögel och fogar - vi får ditt badrum att glänsa.",
   },
 };
 
@@ -16,15 +17,15 @@ export default function Badrumsstadning() {
   const breadcrumbSchema = {
     "@context": "https://schema.org", "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Hem", item: "https://timeoutservice.se" },
-      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://timeoutservice.se/tjanster" },
-      { "@type": "ListItem", position: 3, name: "Badrumsstädning", item: "https://timeoutservice.se/badrumsstadning" },
+      { "@type": "ListItem", position: 1, name: "Hem", item: "https://www.timeoutservice.se" },
+      { "@type": "ListItem", position: 2, name: "Privatperson", item: "https://www.timeoutservice.se/tjanster" },
+      { "@type": "ListItem", position: 3, name: "Badrumsstädning", item: "https://www.timeoutservice.se/badrumsstadning" },
     ],
   };
   const serviceSchema = {
     "@context": "https://schema.org", "@type": "Service",
     name: "Badrumsstädning Stockholm", description: "Professionell badrumsstädning med djuprengöring av kakel, fogar och sanitetsporslin.",
-    provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://timeoutservice.se" },
+    provider: { "@type": "LocalBusiness", name: "Timeout Service AB", "@id": "https://www.timeoutservice.se" },
     areaServed: { "@type": "City", name: "Stockholm" }, serviceType: "Badrumsstädning",
     offers: { "@type": "Offer", priceCurrency: "SEK", price: "1200", description: "Pris efter RUT-avdrag, 1-10 kvm" },
   };

@@ -1,7 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 export const metadata = {
-  title: "Villkor | Timeout Service",
+  title: "Villkor",
+  alternates: { canonical: "/villkor" },
   description: "Allmänna villkor för Timeout Service AB. Bokningsvillkor, betalning, garanti och avbokning.",
 };
 export default function Villkor() {

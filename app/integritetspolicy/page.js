@@ -1,7 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 export const metadata = {
-  title: "Integritetspolicy | Timeout Service",
+  title: "Integritetspolicy",
+  alternates: { canonical: "/integritetspolicy" },
   description: "Integritetspolicy för Timeout Service AB. Hur vi hanterar dina personuppgifter.",
 };
 export default function Integritetspolicy() {
