@@ -2,6 +2,7 @@ import { DM_Serif_Display, DM_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
+import TelTracker from "@/components/TelTracker";
 const heading = DM_Serif_Display({
   subsets: ["latin"],
   weight: "400",
@@ -138,6 +139,7 @@ export default function RootLayout({ children }) {
           data-website-id="3207169c-cafd-4748-8060-cc97c7b47220"
           strategy="afterInteractive"
         />
+      <TelTracker />
       </body>
     </html>
   );
