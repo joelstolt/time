@@ -45,6 +45,12 @@ const tillagg = [
   { namn: "Spröjs", pris: "+30 kr/fönster" },
 ];
 
+const prisExempel = [
+  { titel: "Lägenhet", pris: "från 450 kr", text: "1 rok med upp till 9 fönster, 2-sidig putsning. Upp till 880 kr för 5 rok med 3-glasfönster." },
+  { titel: "Villa och radhus", pris: "från 50 kr/fönster", text: "2-sidiga fönster. 60 kr för 4-sidiga och 70 kr för 6-sidiga. Minimidebitering 800 kr." },
+  { titel: "Inglasad balkong", pris: "från 400 kr", text: "Inglasad uteplats med upp till 10 glaspartier från 500 kr." },
+];
+
 const features = [
   { icon: BadgeCheck, title: "Fast pris", desc: "Inga överraskningar — du vet alltid vad det kostar" },
   { icon: Shield, title: "3 dagars garanti", desc: "Inte nöjd? Vi kommer tillbaka kostnadsfritt" },
@@ -53,6 +59,9 @@ const features = [
 ];
 
 const faqs = [
+  { q: "Vad kostar fönsterputs i Stockholm?", a: "Vi tar fast pris. För lägenhet från 450 kr efter RUT-avdrag (1 rok med upp till 9 fönster) upp till 880 kr (5 rok med 3-glasfönster). För villa och radhus från 50 kr per fönster med minimidebitering 800 kr. Materialavgift 100 kr tillkommer per tillfälle." },
+  { q: "Vad kostar fönsterputs per timme?", a: "Vi debiterar inte per timme utan ett fast pris per bostad eller per fönster, så du vet kostnaden innan vi kommer. Behöver du hjälp med undanplockning kostar det 250 kr per timme." },
+  { q: "Vad kostar det att putsa en inglasad balkong?", a: "Inglasad balkong eller veranda från 400 kr och inglasad uteplats med upp till 10 glaspartier från 500 kr, efter RUT-avdrag." },
   { q: "Varför är era priser lägre än de flesta fönsterputsföretag?", a: "Timeout Service AB är ett familjeägt företag med 35 års erfarenhet. Vi utför de flesta fönsterputsuppdrag själva, vilket gör att vi kan erbjuda konkurrenskraftiga priser utan mellanhänder." },
   { q: "Får man använda RUT-avdrag för fönsterputs?", a: "Ja, du får använda RUT-avdrag som skattebetald privatperson som är minst 18 år vid beskattningsårets utgång. Du behöver vara bosatt i Sverige och bo i bostaden där tjänsten utförs. Du betalar bara 50% av arbetskostnaden." },
   { q: "Vad behöver jag förbereda?", a: "Se till att fönstren är tillgängliga — flytta undan gardiner, blomkrukor och lösa föremål. Fönsterlås bör vara tillgängliga. Behöver du hjälp med undan­plockning kan vi hjälpa till för 250 kr/timme." },
@@ -123,10 +132,10 @@ export default function FonsterputsContent() {
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
               <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-primary)", marginBottom: 12, display: "block" }}>Privatperson</span>
               <h1 style={{ fontSize: "clamp(32px, 5vw, 48px)", marginBottom: 20, lineHeight: 1.1 }}>
-                Professionell fönsterputs i Stockholm
+                Fönsterputs i Stockholm med fast pris
               </h1>
               <p style={{ fontSize: 17, color: "var(--color-body)", lineHeight: 1.7, marginBottom: 16 }}>
-                Vi ger finare utsikter till över 550 kunder varje år! Fönsterputs kan vara svårt att få till om man vill ha ett bra resultat — låt oss ta hand om det med fast pris och RUT-avdrag.
+                Vi ger finare utsikter till över 550 kunder varje år! Fast pris från 450 kr efter RUT-avdrag för lägenhet och från 50 kr per fönster för villa, så du vet vad det kostar innan vi kommer.
               </p>
               <p style={{ fontSize: 15, color: "var(--color-muted)", lineHeight: 1.6, marginBottom: 32 }}>
                 Vi utför fönsterputs i {omraden}.
@@ -140,6 +149,30 @@ export default function FonsterputsContent() {
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
               <img src="/images/tjanst-fonster.jpg" alt="Fönsterputs Stockholm — Timeout Service" style={{ width: "100%", borderRadius: 12, aspectRatio: "4/3", objectFit: "cover" }} />
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Vad kostar fönsterputs */}
+      <section className="section" id="priser" style={{ background: "var(--color-primary-light)" }}>
+        <div className="container" style={{ maxWidth: 960 }}>
+          <SectionHeader tag="Pris" title="Vad kostar fönsterputs i Stockholm?" subtitle="Vi tar fast pris, inte timpris. Här är från-priserna, inkl. moms och efter RUT-avdrag. Hela prislistan med tillägg finns längre ner på sidan." />
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="why-grid">
+            {prisExempel.map((p, i) => (
+              <motion.div key={p.titel} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 }}
+                style={{ padding: 28, background: "white", borderRadius: 12, border: "1px solid var(--color-border)" }}>
+                <h3 style={{ fontSize: 18, marginBottom: 8 }}>{p.titel}</h3>
+                <div style={{ fontSize: 30, fontWeight: 800, color: "var(--color-primary)", fontFamily: "var(--font-body)", marginBottom: 10, lineHeight: 1.1 }}>{p.pris}</div>
+                <p style={{ fontSize: 14, color: "var(--color-muted)", lineHeight: 1.55 }}>{p.text}</p>
+              </motion.div>
+            ))}
+          </div>
+          <p style={{ fontSize: 14, color: "var(--color-muted)", textAlign: "center", marginTop: 20, lineHeight: 1.6 }}>
+            Materialavgift 100 kr per tillfälle. Extra fönster i lägenhet 30 kr/st. Helg, spröjs och persienner debiteras enligt tilläggen nedan.
+          </p>
+          <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap", marginTop: 24 }}>
+            <a href="/boka" className="btn-primary">Boka fönsterputs <ArrowRight size={16} /></a>
+            <a href="#prislista" className="btn-secondary">Se hela prislistan</a>
           </div>
         </div>
       </section>
@@ -163,9 +196,9 @@ export default function FonsterputsContent() {
       </section>
 
       {/* Priser lägenhet */}
-      <section className="section">
+      <section className="section" id="prislista">
         <div className="container" style={{ maxWidth: 800 }}>
-          <SectionHeader tag="Priser fönsterputs" title="Priser Lägenhet" subtitle="Alla priser inkl. moms efter RUT-avdrag (50%). Materialavgift 100 kr tillkommer per tillfälle." />
+          <SectionHeader tag="Priser fönsterputs" title="Fönsterputs pris för lägenhet" subtitle="Alla priser inkl. moms efter RUT-avdrag (50%). Materialavgift 100 kr tillkommer per tillfälle." />
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
             style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--color-border)" }}>
             <div style={{ overflowX: "auto" }}>
@@ -206,7 +239,7 @@ export default function FonsterputsContent() {
       {/* Priser villa */}
       <section className="section-alt">
         <div className="container" style={{ maxWidth: 800 }}>
-          <SectionHeader tag="Villa & radhus" title="Priser för villa och radhus" subtitle="Minimidebitering 800 kr. Alla priser inkl. moms efter RUT-avdrag." />
+          <SectionHeader tag="Villa & radhus" title="Fönsterputs pris för villa och radhus" subtitle="Minimidebitering 800 kr. Alla priser inkl. moms efter RUT-avdrag." />
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
             style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--color-border)" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 15 }}>

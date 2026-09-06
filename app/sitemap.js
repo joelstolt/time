@@ -6,6 +6,7 @@ export default function sitemap() {
     { url: "/tjanster", changeFrequency: "monthly", priority: 0.9 },
     { url: "/foretag", changeFrequency: "monthly", priority: 0.9 },
     { url: "/hemstadning", changeFrequency: "monthly", priority: 0.9 },
+    { url: "/stadfirma-hagersten", changeFrequency: "monthly", priority: 0.8 },
     { url: "/flyttstadning", changeFrequency: "monthly", priority: 0.9 },
     { url: "/fonsterputs", changeFrequency: "monthly", priority: 0.8 },
     { url: "/storstadning", changeFrequency: "monthly", priority: 0.8 },

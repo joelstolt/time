@@ -3,10 +3,10 @@ import Footer from "@/components/Footer";
 import KontorstadningContent from "@/components/KontorstadningContent";
 
 export const metadata = {
-  title: "Kontorstädning Stockholm | Från 300 kr/h",
+  title: "Kontorstädning Stockholm | Från 300 kr/tim, kostnadsfri offert",
   alternates: { canonical: "/kontorstadning" },
   description:
-    "Professionell kontorstädning i Stockholm. Samma städare, ingen bindningstid, nöjd-kund-garanti. Dag, kväll och helg. Från 300 kr/h exkl. moms. Kostnadsfritt möte.",
+    "Kontorstädning i Stockholm från 300 kr/tim exkl. moms. Samma städare, ingen bindningstid, dag, kväll och helg. Fyll i formuläret så får du en offert utan förbindelse.",
   openGraph: { title: "Kontorstädning Stockholm | Timeout Service", description: "Kontorstädning i Stockholm. Flexibla tider, fast pris, ingen bindningstid." },
 };
 

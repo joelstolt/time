@@ -50,6 +50,7 @@ export default function Footer() {
             <a href="/koksstadning" className="footer-link">Köksstädning</a>
             <a href="/badrumsstadning" className="footer-link">Badrumsstädning</a>
             <a href="/mattvatt" className="footer-link">Mattvätt</a>
+            <a href="/stadfirma-hagersten" className="footer-link">Städfirma Hägersten</a>
           </div>
 
           {/* Företag */}

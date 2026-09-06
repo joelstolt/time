@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Phone, ChevronRight, Check, Shield, Leaf, Users, Award, Plus, Minus } from "lucide-react";
+import OffertForm from "./OffertForm";
 
 const fordelar = [
   "Erfaren och professionell personal",
@@ -56,7 +57,7 @@ export default function FlyttstadningForetagContent() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }} className="services-layout">
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
               <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-primary)", marginBottom: 12, display: "block" }}>Företag</span>
-              <h1 style={{ fontSize: "clamp(32px, 5vw, 48px)", marginBottom: 20, lineHeight: 1.1 }}>Flyttstädning för företag i Stockholm</h1>
+              <h1 style={{ fontSize: "clamp(32px, 5vw, 48px)", marginBottom: 20, lineHeight: 1.1 }}>Flyttstädning av kontor och lokaler i Stockholm</h1>
               <p style={{ fontSize: 17, color: "var(--color-body)", lineHeight: 1.7, marginBottom: 16 }}>
                 Dags att flytta till nya lokaler? Vi hjälper er. Att flytta kontor är ett stort projekt — och det är viktigt att lämna de gamla lokalerna i perfekt skick. Vi erbjuder flyttstädning baserad på lång erfarenhet av både små och stora företag.
               </p>
@@ -69,7 +70,7 @@ export default function FlyttstadningForetagContent() {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
-              <img src="/images/flytt-foretag.jpg" alt="Flyttstädning företag Stockholm — Timeout Service" style={{ width: "100%", borderRadius: 12, aspectRatio: "2/3", objectFit: "cover" }} />
+              <OffertForm foretag title="Få en offert på flyttstädning" subtitle="Berätta om lokalen så återkommer vi med ett fast pris." arende="Offert flyttstädning företag" event="lead-offert-foretag" />
             </motion.div>
           </div>
         </div>

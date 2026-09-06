@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Phone, ChevronRight, Check, SmilePlus, Headset, Clock, UserCheck, Plus, Minus } from "lucide-react";
+import OffertForm from "./OffertForm";
 
 const paket = [
   { namn: "Small", frekvens: "1x/månad, min 3 tim", pris: "340–400 kr/tim" },
@@ -95,6 +96,9 @@ export default function KontorstadningContent() {
               <p style={{ fontSize: 17, color: "var(--color-body)", lineHeight: 1.7, marginBottom: 16 }}>
                 Smart, effektiv kontorstädning anpassad efter era behov. Vi städar kontor 7 dagar i veckan — dag, kväll eller helg, året runt.
               </p>
+              <p style={{ fontSize: 15, color: "var(--color-muted)", lineHeight: 1.6, marginBottom: 20 }}>
+                Pris från 300 kr per timme exkl. moms. Fast pris efter ett kostnadsfritt möte i era lokaler.
+              </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
                 {usps.map((u) => (<div key={u.label} style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 14px", background: "var(--color-primary-light)", borderRadius: 8, fontSize: 13, fontWeight: 600, color: "var(--color-primary)" }}><u.icon size={16} /> {u.label}</div>))}
               </div>
@@ -104,7 +108,7 @@ export default function KontorstadningContent() {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
-              <img src="/images/kontor-hero.jpg" alt="Kontorstädning Stockholm — Timeout Service hos Notar" style={{ width: "100%", borderRadius: 12, aspectRatio: "4/3", objectFit: "cover" }} />
+              <OffertForm foretag title="Få en offert på kontorsstädning" subtitle="Fyll i formuläret så återkommer vi med ett prisförslag för era lokaler." arende="Offert kontorsstädning" event="lead-offert-foretag" />
             </motion.div>
           </div>
         </div>

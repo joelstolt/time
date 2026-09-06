@@ -3,11 +3,11 @@ import Footer from "@/components/Footer";
 import FlyttstadningForetagContent from "@/components/FlyttstadningForetagContent";
 
 export const metadata = {
-  title: "Flyttstädning företag Stockholm | Kontor & Lokaler",
+  title: "Flyttstädning kontor Stockholm | Fast pris, kostnadsfri offert",
   alternates: { canonical: "/flyttstadning-foretag" },
   description:
-    "Flyttstädning för företag i Stockholm. Garanti, fast pris, allt material ingår. Ingen underleverantör. Kostnadsfritt platsbesök. Boka idag!",
-  openGraph: { title: "Flyttstädning företag Stockholm | Timeout Service", description: "Flyttstädning för kontor och lokaler. Garanti och fast pris." },
+    "Flyttstädning av kontor och lokaler i Stockholm. Fast pris efter kostnadsfritt platsbesök, garanti vid besiktningen och egen personal. Fyll i formuläret så får du en offert.",
+  openGraph: { title: "Flyttstädning kontor Stockholm | Timeout Service", description: "Flyttstädning för kontor och lokaler. Garanti och fast pris." },
 };
 
 export default function FlyttstadningForetag() {
