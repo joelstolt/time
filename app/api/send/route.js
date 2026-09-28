@@ -139,7 +139,8 @@ export async function POST(req) {
       </div>
     `;
 
-    await getResend().emails.send({
+    // Resend-SDK:n kastar inte vid fel utan returnerar { error }, så svaret måste läsas.
+    const { error: sendError } = await getResend().emails.send({
       from: FROM_EMAIL,
       to: TO_EMAIL,
       replyTo: email,
@@ -147,6 +148,14 @@ export async function POST(req) {
       html,
       attachments: attachments.length ? attachments : undefined,
     });
+
+    if (sendError) {
+      console.error("Email error (Resend):", sendError);
+      return NextResponse.json(
+        { error: "Kunde inte skicka förfrågan." },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
