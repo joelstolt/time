@@ -12,6 +12,7 @@ const getResend = () => (_resend ||= new Resend(process.env.RESEND_API_KEY));
 // hamnar kundens leads tyst på fel adress utan att något syns i gränssnittet.
 const TO_EMAIL = process.env.CONTACT_TO || "info@timeoutservice.se";
 const FROM_EMAIL = process.env.CONTACT_FROM || "Timeout Service <bokning@timeoutservice.se>";
+const BCC_EMAIL = process.env.CONTACT_BCC || "joel@welovemarketing.se";
 
 const MAX_FILES = 10;
 const MAX_FILE_BYTES = 8 * 1024 * 1024; // 8 MB per fil (klienten komprimerar normalt till <1 MB)
@@ -109,6 +110,7 @@ export async function POST(req) {
     const { error: sendError } = await getResend().emails.send({
       from: FROM_EMAIL,
       to: TO_EMAIL,
+      bcc: BCC_EMAIL,
       replyTo: email,
       subject,
       html,
